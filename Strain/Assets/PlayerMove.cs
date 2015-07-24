@@ -12,37 +12,29 @@ public class PlayerMove : MonoBehaviour {
 	void Update () {
 
 		//Movement code
-		Vector2 velocity = new Vector2 (0, 0);
+		Vector3 velocity = new Vector3 (0, 0, 0);
 
 		if (Input.GetKey (KeyCode.A)) 
 		{
-			velocity.x -= 1;
+			velocity.x -= 0.2f;
 		}
 		if (Input.GetKey (KeyCode.S)) 
 		{
-			velocity.y -= 1;
+			velocity.z -= 0.2f;
 		}
 		if (Input.GetKey (KeyCode.D)) 
 		{
-			velocity.x += 1;
+			velocity.x += 0.2f;
 		}
 		if (Input.GetKey (KeyCode.W)) 
 		{
-			velocity.y += 1;
+			velocity.z += 0.2f;
 		}
 
-		transform.position = new Vector3 (velocity.x + transform.position.x, transform.position.y, velocity.y + transform.position.z);
 
-		//Rotation code
-		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-		RaycastHit hit;
-		float distance = 0.0f;
-		if (Physics.Raycast (ray, out hit)) 
-		{
-			distance = hit.distance;
-		}
-		transform.LookAt (ray.GetPoint (distance - 1.28f), Vector3.up);
+		transform.Translate (velocity);
 
 		//Camera.main.transform.position = new Vector3 (transform.position.x, transform.position.y, Camera.main.transform.position.z);
 	}
+
 }
