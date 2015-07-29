@@ -23,7 +23,7 @@ public class PlayerRotate : MonoBehaviour {
 		{
 			distance = hit.distance;
 		}
-		transform.LookAt (ray.GetPoint (distance - 1.28f), Vector3.up);
+		transform.LookAt (ray.GetPoint (distance), Vector3.up);
 
 	}
 }
