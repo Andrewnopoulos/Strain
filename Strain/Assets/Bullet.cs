@@ -9,6 +9,8 @@ public class Bullet : MonoBehaviour {
 
 	public float lifeTime;
 
+	public Vector3 pos;
+	public Vector3 dir;
 
 	public GameObject collided;
 	public bool collidedbool = false;
@@ -23,6 +25,9 @@ public class Bullet : MonoBehaviour {
 		startPos = transform.position;
 
 		lineRenderer = transform.GetComponent<LineRenderer> ();
+
+		pos = transform.position;
+		dir = transform.forward;
 
 		Ray ray = new Ray (transform.position, transform.forward);
 		RaycastHit hit;
