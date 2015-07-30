@@ -17,10 +17,12 @@ public class Bullet : MonoBehaviour {
 
 	private int layermask = 1;
 
+	Ray ray;
+
 	// Use this for initialization
 	void Start () {
 
-		layermask = ((1 << 10) & (1 << 11));
+		layermask = ((1 << 10) | (1 << 11));
 
 		startPos = transform.position;
 
@@ -29,16 +31,22 @@ public class Bullet : MonoBehaviour {
 		pos = transform.position;
 		dir = transform.forward;
 
-		Ray ray = new Ray (transform.position, transform.forward);
+		ray = new Ray (transform.position, transform.forward);
 		RaycastHit hit;
-		if (Physics.Raycast (ray, out hit, 1000, layermask)) 
+		if (Physics.Raycast (ray, out hit, 100000, layermask))
 		{
 			//collided = hit.collider.gameObject;
 			collidedbool = true;
 		}
 
 	}
-	
+
+	void OnDrawGizmosSelected()
+	{
+		Gizmos.color = Color.cyan;
+		Gizmos.DrawRay (ray);
+	}
+
 	// Update is called once per frame
 	void Update () {
 
