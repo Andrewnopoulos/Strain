@@ -50,12 +50,12 @@ public class Bullet : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		transform.Translate (Vector3.forward * 5);
+		transform.Translate (Vector3.forward * 4);
 
 		lineRenderer.SetPosition (0, startPos);
 		lineRenderer.SetPosition (1, transform.position);
 
-		startPos += Vector3.Normalize ((transform.position - startPos) * 20);
+		startPos += Vector3.Normalize ((transform.position - startPos)) * 2;
 
 		lifeTime -= Time.deltaTime;
 
