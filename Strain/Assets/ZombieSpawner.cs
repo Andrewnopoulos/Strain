@@ -1,27 +1,36 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ZombieSpawner : MonoBehaviour {
 
 	public GameObject zombieprefab;
+	public GameObject humanprefab;
 	public GameObject player;
 
-	public float spawnRate = 1;
-	private float spawnCooldown = 0;
+	public float zombieSpawnRate = 1;
+	private float zombieSpawnCooldown = 0;
+
+	public float humanSpawnRate = 1;
+	private float humanSpawnCooldown = 0;
+
+	public List<GameObject> humanList;
 
 	// Use this for initialization
 	void Start () {
 	
-		spawnCooldown = spawnRate;
+		zombieSpawnCooldown = zombieSpawnRate;
+		humanSpawnCooldown = humanSpawnRate;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
-		spawnCooldown -= Time.deltaTime;
+		zombieSpawnCooldown -= Time.deltaTime;
+		humanSpawnCooldown -= Time.deltaTime;
 
-		if (spawnCooldown <= 0) {
-			spawnCooldown  = spawnRate;
+		if (zombieSpawnCooldown <= 0) {
+			zombieSpawnCooldown  = zombieSpawnRate;
 
 			float randX = Random.Range(-50, 50);
 			float randY = Random.Range(-50, 50);
@@ -30,6 +39,19 @@ public class ZombieSpawner : MonoBehaviour {
 			zombie.layer = 10;
 			Zombie script = zombie.GetComponent<Zombie>();
 			script.target = player;
+			script.groundReference = gameObject;
+		}
+
+		if (humanSpawnCooldown <= 0) {
+			humanSpawnCooldown  = humanSpawnRate;
+
+			
+			float randX = Random.Range(-50, 50);
+			float randY = Random.Range(-50, 50);
+
+			GameObject newHuman = (GameObject)Instantiate( humanprefab, new Vector3(randX, 1, randY), transform.rotation);
+
+			humanList.Add(newHuman);
 		}
 
 	}
