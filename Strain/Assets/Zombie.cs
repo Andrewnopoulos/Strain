@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-
 public class Zombie : MonoBehaviour {
 
 	public GameObject target;
@@ -35,6 +34,10 @@ public class Zombie : MonoBehaviour {
 		{
 			navComponent.SetDestination(targetTransform.position);
 		}
+
+		if ((targetTransform.position - transform.position).magnitude < 2) {
+			BiteHuman();
+		}
 	}
 
 	void FindNearestHuman()
@@ -48,6 +51,14 @@ public class Zombie : MonoBehaviour {
 				target = fuckder;
 				targetTransform = target.transform;
 			}
+		}
+	}
+
+	void BiteHuman()
+	{
+		if (target != null) {
+			Human script = target.GetComponent<Human>();
+			script.alive = false;
 		}
 	}
 }

@@ -50,9 +50,19 @@ public class ZombieSpawner : MonoBehaviour {
 			float randY = Random.Range(-50, 50);
 
 			GameObject newHuman = (GameObject)Instantiate( humanprefab, new Vector3(randX, 1, randY), transform.rotation);
-
+			Human script = newHuman.GetComponent<Human>();
+			script.groundReference = gameObject;
 			humanList.Add(newHuman);
 		}
 
+	}
+
+	public void SpawnZombie(Transform location)
+	{
+		GameObject zombie = (GameObject)Instantiate(zombieprefab, location.position, location.rotation);
+		zombie.layer = 10;
+		Zombie script = zombie.GetComponent<Zombie>();
+		script.target = player;
+		script.groundReference = gameObject;
 	}
 }
