@@ -6,14 +6,11 @@ public class Bullet : MonoBehaviour {
 	private LineRenderer lineRenderer;
 
 	private Vector3 startPos;
+	private Vector3 endPos;
 
 	public float lifeTime;
 
-	public Vector3 pos;
-	public Vector3 dir;
-
-	public GameObject collided;
-	public bool collidedbool = false;
+	private GameObject collidedObject;
 
 	private int layermask = 1;
 
@@ -22,22 +19,30 @@ public class Bullet : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+		float distance = 50;
+
 		layermask = ((1 << 10) | (1 << 11));
 
-		startPos = transform.position;
+		startPos = transform.position;	
 
 		lineRenderer = transform.GetComponent<LineRenderer> ();
 
-		pos = transform.position;
-		dir = transform.forward;
-
 		ray = new Ray (transform.position, transform.forward);
 		RaycastHit hit;
-		if (Physics.Raycast (ray, out hit, 100000, layermask))
+		if (Physics.Raycast (ray, out hit, 1000, layermask))
 		{
-			//collided = hit.collider.gameObject;
-			collidedbool = true;
+			collidedObject = hit.collider.gameObject;
+
+			distance = hit.distance;
+
+			if (collidedObject.layer == 10)
+				Destroy(collidedObject);
 		}
+
+		endPos = startPos + (transform.forward * distance);
+
+		lineRenderer.SetPosition (0, startPos);
+		lineRenderer.SetPosition (1, endPos);
 
 	}
 
@@ -49,13 +54,6 @@ public class Bullet : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
-		transform.Translate (Vector3.forward * 4);
-
-		lineRenderer.SetPosition (0, startPos);
-		lineRenderer.SetPosition (1, transform.position);
-
-		startPos += Vector3.Normalize ((transform.position - startPos)) * 2;
 
 		lifeTime -= Time.deltaTime;
 
