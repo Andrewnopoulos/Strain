@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour {
 
 		float distance = 50;
 
-		layermask = ((1 << 10) | (1 << 11));
+		layermask = ((1 << 10) | (1 << 11) | (1 << 12));
 
 		startPos = transform.position;	
 
@@ -35,8 +35,11 @@ public class Bullet : MonoBehaviour {
 
 			distance = hit.distance;
 
-			if (collidedObject.layer == 10)
-				Destroy(collidedObject);
+			if (collidedObject.layer == 10 || collidedObject.layer == 12)
+			{
+				NPC script = collidedObject.GetComponent<NPC>();
+				script.alive = false;
+			}
 		}
 
 		endPos = startPos + (transform.forward * distance);
