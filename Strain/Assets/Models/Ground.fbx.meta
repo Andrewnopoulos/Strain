@@ -1,0 +1,156 @@
+fileFormatVersion: 2
+guid: 0e5f358fa11f6c94297ec18c3203f2ca
+timeCreated: 1438851683
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: GroundPlane1
+    100004: GroundPlane10
+    100006: GroundPlane11
+    100008: GroundPlane12
+    100010: GroundPlane13
+    100012: GroundPlane14
+    100014: GroundPlane15
+    100016: GroundPlane16
+    100018: GroundPlane17
+    100020: GroundPlane2
+    100022: GroundPlane3
+    100024: GroundPlane4
+    100026: GroundPlane5
+    100028: GroundPlane6
+    100030: GroundPlane7
+    100032: GroundPlane8
+    100034: GroundPlane9
+    400000: //RootNode
+    400002: GroundPlane1
+    400004: GroundPlane10
+    400006: GroundPlane11
+    400008: GroundPlane12
+    400010: GroundPlane13
+    400012: GroundPlane14
+    400014: GroundPlane15
+    400016: GroundPlane16
+    400018: GroundPlane17
+    400020: GroundPlane2
+    400022: GroundPlane3
+    400024: GroundPlane4
+    400026: GroundPlane5
+    400028: GroundPlane6
+    400030: GroundPlane7
+    400032: GroundPlane8
+    400034: GroundPlane9
+    2300000: GroundPlane1
+    2300002: GroundPlane10
+    2300004: GroundPlane11
+    2300006: GroundPlane12
+    2300008: GroundPlane13
+    2300010: GroundPlane14
+    2300012: GroundPlane15
+    2300014: GroundPlane16
+    2300016: GroundPlane17
+    2300018: GroundPlane2
+    2300020: GroundPlane3
+    2300022: GroundPlane4
+    2300024: GroundPlane5
+    2300026: GroundPlane6
+    2300028: GroundPlane7
+    2300030: GroundPlane8
+    2300032: GroundPlane9
+    3300000: GroundPlane1
+    3300002: GroundPlane10
+    3300004: GroundPlane11
+    3300006: GroundPlane12
+    3300008: GroundPlane13
+    3300010: GroundPlane14
+    3300012: GroundPlane15
+    3300014: GroundPlane16
+    3300016: GroundPlane17
+    3300018: GroundPlane2
+    3300020: GroundPlane3
+    3300022: GroundPlane4
+    3300024: GroundPlane5
+    3300026: GroundPlane6
+    3300028: GroundPlane7
+    3300030: GroundPlane8
+    3300032: GroundPlane9
+    4300000: GroundPlane1
+    4300002: GroundPlane2
+    4300004: GroundPlane3
+    4300006: GroundPlane4
+    4300008: GroundPlane5
+    4300010: GroundPlane6
+    4300012: GroundPlane7
+    4300014: GroundPlane8
+    4300016: GroundPlane9
+    4300018: GroundPlane10
+    4300020: GroundPlane11
+    4300022: GroundPlane12
+    4300024: GroundPlane13
+    4300026: GroundPlane14
+    4300028: GroundPlane15
+    4300030: GroundPlane16
+    4300032: GroundPlane17
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
