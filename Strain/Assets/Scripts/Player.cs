@@ -53,6 +53,38 @@ public class Player : MonoBehaviour {
 
 	}
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "PistolPickup")
+        {
+            hasPistol = true;
+            SwitchToPistol();
+
+            Destroy(other.gameObject);
+        }
+        else if (other.tag == "RiflePickup")
+        {
+            hasRifle = true;
+            SwitchToRifle();
+
+            Destroy(other.gameObject);
+        }
+        else if (other.tag == "ShotgunPickup")
+        {
+            hasShotgun = true;
+            SwitchToShotgun();
+
+            Destroy(other.gameObject);
+        }
+        else if (other.tag == "FlamethrowerPickup")
+        {
+            hasFlamethrower = true;
+            SwitchToFlamethrower();
+
+            Destroy(other.gameObject);
+        }
+    }
+
     void ToggleFlashLight()
     {
         flashlight.enabled = !flashlight.enabled;
@@ -60,7 +92,7 @@ public class Player : MonoBehaviour {
 
     void CycleGun()
     {
-        if (gun.GetComponent<Pistol>().enabled && hasPistol)
+        if (gun.GetComponent<Pistol>().enabled && hasRifle)
         {
             gun.GetComponent<AssaultRifle>().enabled = true;
 
@@ -68,13 +100,13 @@ public class Player : MonoBehaviour {
 
             gun.GetComponent<AssaultRifle>().holsterCooldown = gun.GetComponent<AssaultRifle>().holsterRate;
         }
-        else if (gun.GetComponent<AssaultRifle>().enabled && hasRifle)
+        else if (gun.GetComponent<AssaultRifle>().enabled && hasPistol)
         {
             gun.GetComponent<Pistol>().enabled = true;
 
             gun.GetComponent<AssaultRifle>().enabled = false;
 
-            gun.GetComponent<Pistol>().holsterCooldown = gun.GetComponent<AssaultRifle>().holsterRate;
+            gun.GetComponent<Pistol>().holsterCooldown = gun.GetComponent<Pistol>().holsterRate;
         }
         else if (hasShotgun)
         {
@@ -88,7 +120,7 @@ public class Player : MonoBehaviour {
 
     void SwitchToPistol()
     {
-        if (!hasPistol)
+        if (!hasPistol || gun.GetComponent<Pistol>().enabled)
             return;
 
         //enable pistol
@@ -101,7 +133,7 @@ public class Player : MonoBehaviour {
     }
     void SwitchToRifle()
     {
-        if (!hasRifle)
+        if (!hasRifle || gun.GetComponent<AssaultRifle>().enabled)
             return;
 
         gun.GetComponent<AssaultRifle>().enabled = true;
