@@ -6,64 +6,19 @@ public class Pistol : GunClass
 
 	// Use this for initialization
 	void Start () {
-	
-		fireRate = 1.0f;
+
+        bulletDeviation = 1.0f;
+        holsterRate = 1.5f;
+        holsterCooldown = holsterRate;
+		fireRate = 0.6f;
 		shotCooldown = fireRate;
 		damage = 10.0f;
 		totalAmmo = 64;
 		maxClipAmmo = 8;
 		currentClipAmmo = maxClipAmmo;
-		reloadTime = 3.0f;
+		reloadTime = 2.0f;
 		currentReloadTime = reloadTime;
 
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-		shotCooldown -= Time.deltaTime;
-
-		if (currentClipAmmo == 0) {
-			reload = true;
-		}
-
-		if (reload) {
-
-			currentReloadTime -= Time.deltaTime;
-
-			if (currentReloadTime <= 0.0f)
-			{
-				reload = false;
-				currentReloadTime = reloadTime;
-				if (maxClipAmmo < totalAmmo)
-				{
-					totalAmmo -= maxClipAmmo;
-					currentClipAmmo = maxClipAmmo;
-				}
-				else
-				{
-					currentClipAmmo = totalAmmo;
-					totalAmmo = 0;
-				}
-			}
-		}
-
-		//if left mouse button is held down
-		if (Input.GetMouseButton (0)) 
-		{
-			if (currentClipAmmo > 0 && shotCooldown <= 0.0f)
-			{
-				//instantiate bullet prefab in direction player is facing
-				GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation) as GameObject;
-
-                Bullet script = newBullet.GetComponent<Bullet>();
-
-                script.damage = damage;
-
-				shotCooldown = fireRate;
-				currentClipAmmo -= 1;
-			}
-		}
-
-	}
 }

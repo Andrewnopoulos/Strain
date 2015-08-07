@@ -5,6 +5,13 @@ public class GunClass : MonoBehaviour {
 
 	public GameObject bullet;
 
+    //bullet deviation
+    public float bulletDeviation;
+
+    //switchgun cooldown
+    public float holsterRate;
+    public float holsterCooldown;
+
 	//how many bullets are shot per second
 	public float fireRate;
 	//current time between shots
@@ -33,7 +40,57 @@ public class GunClass : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void Update () 
+    {
+	    shotCooldown -= Time.deltaTime;
+        holsterCooldown -= Time.deltaTime;
+
+		if (currentClipAmmo == 0) {
+			reload = true;
+		}
+
+		if (reload) {
+
+			currentReloadTime -= Time.deltaTime;
+
+			if (currentReloadTime <= 0.0f)
+			{
+				reload = false;
+				currentReloadTime = reloadTime;
+				if (maxClipAmmo < totalAmmo)
+				{
+					totalAmmo -= maxClipAmmo;
+					currentClipAmmo = maxClipAmmo;
+				}
+				else
+				{
+					currentClipAmmo = totalAmmo;
+					totalAmmo = 0;
+				}
+			}
+		}
+
+		//if left mouse button is held down
+		if (Input.GetMouseButton (0)) 
+		{
+			if (currentClipAmmo > 0 && shotCooldown <= 0.0f && holsterCooldown <= 0.0f)
+			{
+
+				//instantiate bullet prefab in direction player is facing
+				GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation) as GameObject;
+
+                //make a slight offset to rotation
+                float randX = Random.Range(-bulletDeviation, bulletDeviation);
+                newBullet.transform.Rotate(new Vector3(0, 1, 0), randX);
+
+                Bullet script = newBullet.GetComponent<Bullet>();
+
+                script.damage = damage;
+
+				shotCooldown = fireRate;
+				currentClipAmmo -= 1;
+			}
+		}
+
 	}
 }

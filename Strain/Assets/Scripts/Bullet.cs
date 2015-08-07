@@ -21,17 +21,17 @@ public class Bullet : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		float distance = 50;
+		float distance = 5000;
 
 		layermask = ((1 << 10) | (1 << 11) | (1 << 12));
 
-		startPos = transform.position;	
+		startPos = transform.position;
 
 		lineRenderer = transform.GetComponent<LineRenderer> ();
 
 		ray = new Ray (transform.position, transform.forward);
 		RaycastHit hit;
-		if (Physics.Raycast (ray, out hit, 1000, layermask))
+		if (Physics.Raycast (ray, out hit, 10000, layermask))
 		{
 			collidedObject = hit.collider.gameObject;
 

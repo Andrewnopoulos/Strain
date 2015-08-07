@@ -6,7 +6,10 @@ public class AssaultRifle : GunClass
 	
 	// Use this for initialization
 	void Start () {
-		
+
+        bulletDeviation = 5.0f;
+        holsterRate = 1.5f;
+        holsterCooldown = holsterRate;
 		fireRate = 0.2f;
 		shotCooldown = fireRate;
 		damage = 8.0f;
@@ -17,49 +20,5 @@ public class AssaultRifle : GunClass
 		currentReloadTime = reloadTime;
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-		shotCooldown -= Time.deltaTime;
-		
-		if (currentClipAmmo == 0) {
-			reload = true;
-		}
-		
-		if (reload) {
-			
-			currentReloadTime -= Time.deltaTime;
-			
-			if (currentReloadTime <= 0.0f)
-			{
-				reload = false;
-				currentReloadTime = reloadTime;
-				if (maxClipAmmo < totalAmmo)
-				{
-					totalAmmo -= maxClipAmmo;
-					currentClipAmmo = maxClipAmmo;
-				}
-				else
-				{
-					currentClipAmmo = totalAmmo;
-					totalAmmo = 0;
-				}
-			}
-		}
-		
-		//if left mouse button is held down
-		if (Input.GetMouseButton (0)) 
-		{
-			if (currentClipAmmo > 0 && shotCooldown <= 0.0f)
-			{
-				//instantiate bullet prefab in direction player is facing
-				Instantiate(bullet, transform.position, transform.rotation);
-				
-				shotCooldown = fireRate;
-				currentClipAmmo -= 1;
-			}
-		}
-		
-	}
+
 }

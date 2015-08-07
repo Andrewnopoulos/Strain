@@ -2,11 +2,16 @@
 using System.Collections;
 
 public class NPC : MonoBehaviour {
-	
+
 	public Transform target;
 	public Vector3 targetPosition;
+
 	public float speed;
     public float health;
+    public float damage;
+
+    public float biteSpeed;
+    private float biteCooldown = 0;
 
 	private NavMeshAgent navComponent;
 
@@ -34,27 +39,37 @@ public class NPC : MonoBehaviour {
 			myMat.material = green;
 		}
 
+        biteCooldown = biteSpeed;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 		if (isZombie) 
 		{
-			FindNearestHuman ();
-			
+            biteCooldown -= Time.deltaTime;
+
+            FindNearestHuman();
+
 			if (target) 
 			{
 				navComponent.SetDestination(target.position);
 			}
 			
-			if ((target.position - transform.position).magnitude < 2) {
+			if ((target.position - transform.position).magnitude < 100 && biteCooldown <= 0) {
 				BiteHuman();
 			}
 		} 
 		else 
 		{
-			if((transform.position - targetPosition).magnitude < 0.5)
+
+            FindNearestZombie();
+
+            if ((transform.position - target.position).magnitude < 2000)
+            {
+                Flee();
+            }
+			if((transform.position - targetPosition).magnitude < 100)
 			{ 
 				Wander(); 
 			}
@@ -88,8 +103,8 @@ public class NPC : MonoBehaviour {
 
 	void Wander()
 	{
-		targetPosition = Random.insideUnitSphere * 50;
-		targetPosition = new Vector3 (targetPosition.x, 1, targetPosition.z);
+        targetPosition = Random.insideUnitSphere * 10000;
+		targetPosition = new Vector3 (targetPosition.x, transform.position.y, targetPosition.z);
 	}
 
 	public void BecomeZombie()
@@ -99,11 +114,12 @@ public class NPC : MonoBehaviour {
 		gameObject.layer = 10;
 		myMat.material = red;
 
+        FindNearestHuman();
 	}
 
 	void FindNearestHuman()
 	{
-		float smallestDist = 9999;
+		float smallestDist = 999999;
 		foreach (GameObject human in zombieSpawnerReference.npcList)
 		{
 			if (human == null)
@@ -118,6 +134,23 @@ public class NPC : MonoBehaviour {
 			}
 		}
 	}
+    void FindNearestZombie()
+    {
+        float smallestDist = 999999;
+        foreach (GameObject zombie in zombieSpawnerReference.npcList)
+        {
+            if (zombie == null)
+                continue;
+            if (!(zombie.tag == "Zombie"))
+                continue;
+
+            if ((zombie.transform.position - transform.position).magnitude < smallestDist)
+            {
+                smallestDist = (zombie.transform.position - transform.position).magnitude;
+                target = zombie.transform;
+            }
+        }
+    }
 	
 	void BiteHuman()
 	{
@@ -125,27 +158,24 @@ public class NPC : MonoBehaviour {
 		{
 			if (target.gameObject.tag == "Human")
 			{
-			NPC script = target.GetComponent<NPC>();
-			script.BecomeZombie();
-            zombieSpawnerReference.currentZombie++;
-            zombieSpawnerReference.currentHuman--;
-
-
+			    NPC script = target.GetComponent<NPC>();
+			    script.BecomeZombie();
+                zombieSpawnerReference.currentZombie++;
+                zombieSpawnerReference.currentHuman--;
 			}
 			else if (target.gameObject.tag == "Player")
 			{
-				//player take damage
+                Player script = target.GetComponent<Player>();
+                script.health -= damage;
 			}
 		}
-	}
 
-	void FindNearestZombie()
-	{
-
+        biteCooldown = biteSpeed;
 	}
 
 	void Flee()
 	{
-
+        Vector3 fleeDir = transform.position - target.position;
+        targetPosition = Vector3.Normalize(fleeDir) * 1000;
 	}
 }
