@@ -5,6 +5,9 @@ public class GunClass : MonoBehaviour {
 
 	public GameObject bullet;
 
+    //how many bullets shot at once (for shotgun)
+    public float shotCount;
+
     //bullet deviation
     public float bulletDeviation;
 
@@ -76,19 +79,22 @@ public class GunClass : MonoBehaviour {
 			if (currentClipAmmo > 0 && shotCooldown <= 0.0f && holsterCooldown <= 0.0f)
 			{
 
-				//instantiate bullet prefab in direction player is facing
-				GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation) as GameObject;
+                for (int i = 0; i < shotCount; ++i)
+                {
+                    //instantiate bullet prefab in direction player is facing
+                    GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation) as GameObject;
 
-                //make a slight offset to rotation
-                float randX = Random.Range(-bulletDeviation, bulletDeviation);
-                newBullet.transform.Rotate(new Vector3(0, 1, 0), randX);
+                    //make a slight offset to rotation
+                    float randX = Random.Range(-bulletDeviation, bulletDeviation);
+                    newBullet.transform.Rotate(new Vector3(0, 1, 0), randX);
 
-                Bullet script = newBullet.GetComponent<Bullet>();
+                    Bullet script = newBullet.GetComponent<Bullet>();
 
-                script.damage = damage;
+                    script.damage = damage;
 
-				shotCooldown = fireRate;
-				currentClipAmmo -= 1;
+                    shotCooldown = fireRate;
+                    currentClipAmmo -= 1;
+                }
 			}
 		}
 
