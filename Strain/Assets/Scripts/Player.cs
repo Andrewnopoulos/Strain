@@ -5,6 +5,7 @@ public class Player : MonoBehaviour {
 
     public float health;
     public GameObject gun;
+    public Light flashlight;
 
 	// Use this for initialization
 	void Start () {
@@ -18,13 +19,22 @@ public class Player : MonoBehaviour {
         {
             CycleGun();
         }
-	
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            ToggleFlashLight();
+        }
+
         if (health <= 0)
         {
             Die();
         }
 
 	}
+
+    void ToggleFlashLight()
+    {
+        flashlight.enabled = !flashlight.enabled;
+    }
 
     void CycleGun()
     {

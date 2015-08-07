@@ -7,9 +7,9 @@ public class ZombieSpawner : MonoBehaviour {
 	public GameObject npcprefab;
 	public GameObject player;
 
-	public float maxNPC = 100;
+	public float maxNPC = 20;
 	public float maxZombie = 1;
-	public float maxHuman = 100;
+	public float maxHuman = 20;
 
 	public float currentHuman = 0;
 	public float currentZombie = 0;
@@ -24,7 +24,7 @@ public class ZombieSpawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+
 		zombieSpawnCooldown = zombieSpawnRate;
 		humanSpawnCooldown = humanSpawnRate;
 
