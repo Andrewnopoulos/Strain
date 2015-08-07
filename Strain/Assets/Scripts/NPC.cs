@@ -176,6 +176,6 @@ public class NPC : MonoBehaviour {
 	void Flee()
 	{
         Vector3 fleeDir = transform.position - target.position;
-        targetPosition = Vector3.Normalize(fleeDir) * 1000;
+        targetPosition = transform.position + (Vector3.Normalize(fleeDir) * 1000);
 	}
 }

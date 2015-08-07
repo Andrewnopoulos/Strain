@@ -7,6 +7,11 @@ public class Player : MonoBehaviour {
     public GameObject gun;
     public Light flashlight;
 
+    public bool hasPistol = false;
+    public bool hasRifle = false;
+    public bool hasShotgun = false;
+    public bool hasFlamethrower = false;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -24,6 +29,23 @@ public class Player : MonoBehaviour {
             ToggleFlashLight();
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SwitchToPistol();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SwitchToRifle();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SwitchToShotgun();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            SwitchToFlamethrower();
+        }
+
         if (health <= 0)
         {
             Die();
@@ -38,20 +60,67 @@ public class Player : MonoBehaviour {
 
     void CycleGun()
     {
-        if (gun.GetComponent<Pistol>().enabled == true)
+        if (gun.GetComponent<Pistol>().enabled && hasPistol)
         {
-            gun.GetComponent<Pistol>().enabled = false;
             gun.GetComponent<AssaultRifle>().enabled = true;
+
+            gun.GetComponent<Pistol>().enabled = false;
 
             gun.GetComponent<AssaultRifle>().holsterCooldown = gun.GetComponent<AssaultRifle>().holsterRate;
         }
-        else
+        else if (gun.GetComponent<AssaultRifle>().enabled && hasRifle)
         {
             gun.GetComponent<Pistol>().enabled = true;
+
             gun.GetComponent<AssaultRifle>().enabled = false;
 
             gun.GetComponent<Pistol>().holsterCooldown = gun.GetComponent<AssaultRifle>().holsterRate;
         }
+        else if (hasShotgun)
+        {
+
+        }
+        else if (hasFlamethrower)
+        {
+
+        }
+    }
+
+    void SwitchToPistol()
+    {
+        if (!hasPistol)
+            return;
+
+        //enable pistol
+        gun.GetComponent<Pistol>().enabled = true;
+
+        //disable other guns
+        gun.GetComponent<AssaultRifle>().enabled = false;
+
+        gun.GetComponent<Pistol>().holsterCooldown = gun.GetComponent<Pistol>().holsterRate;
+    }
+    void SwitchToRifle()
+    {
+        if (!hasRifle)
+            return;
+
+        gun.GetComponent<AssaultRifle>().enabled = true;
+
+        gun.GetComponent<Pistol>().enabled = false;
+
+        gun.GetComponent<AssaultRifle>().holsterCooldown = gun.GetComponent<AssaultRifle>().holsterRate;
+    }
+
+    void SwitchToShotgun()
+    {
+        if (!hasShotgun)
+            return;
+    }
+
+    void SwitchToFlamethrower()
+    {
+        if (!hasFlamethrower)
+            return;
     }
 
     void Die()
