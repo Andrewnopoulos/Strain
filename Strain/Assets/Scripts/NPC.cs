@@ -6,6 +6,7 @@ public class NPC : MonoBehaviour {
 	public Transform target;
 	public Vector3 targetPosition;
 	public float speed;
+    public float health;
 
 	private NavMeshAgent navComponent;
 
@@ -63,6 +64,11 @@ public class NPC : MonoBehaviour {
 			navComponent.SetDestination (target.position);
 		else
 			navComponent.SetDestination (targetPosition);
+
+        if (health <= 0)
+        {
+            alive = false;
+        }
 
 		if (!alive) {
 			KillYourself();

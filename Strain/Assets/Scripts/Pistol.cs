@@ -10,7 +10,7 @@ public class Pistol : GunClass
 		fireRate = 1.0f;
 		shotCooldown = fireRate;
 		damage = 10.0f;
-		totalAmmo = 100;
+		totalAmmo = 64;
 		maxClipAmmo = 8;
 		currentClipAmmo = maxClipAmmo;
 		reloadTime = 3.0f;
@@ -54,7 +54,11 @@ public class Pistol : GunClass
 			if (currentClipAmmo > 0 && shotCooldown <= 0.0f)
 			{
 				//instantiate bullet prefab in direction player is facing
-				Instantiate(bullet, transform.position, transform.rotation);
+				GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation) as GameObject;
+
+                Bullet script = newBullet.GetComponent<Bullet>();
+
+                script.damage = damage;
 
 				shotCooldown = fireRate;
 				currentClipAmmo -= 1;

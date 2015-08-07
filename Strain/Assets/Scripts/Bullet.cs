@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour {
 
+    public float damage;
+
 	private LineRenderer lineRenderer;
 
 	private Vector3 startPos;
@@ -38,7 +40,7 @@ public class Bullet : MonoBehaviour {
 			if (collidedObject.layer == 10 || collidedObject.layer == 12)
 			{
 				NPC script = collidedObject.GetComponent<NPC>();
-				script.alive = false;
+				script.health -= damage;
 			}
 		}
 

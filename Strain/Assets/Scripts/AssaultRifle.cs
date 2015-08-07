@@ -9,7 +9,7 @@ public class AssaultRifle : GunClass
 		
 		fireRate = 0.2f;
 		shotCooldown = fireRate;
-		damage = 10.0f;
+		damage = 8.0f;
 		totalAmmo = 120;
 		maxClipAmmo = 30;
 		currentClipAmmo = maxClipAmmo;

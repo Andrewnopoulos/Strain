@@ -3,9 +3,14 @@ using System.Collections;
 
 public class PlayerMove : MonoBehaviour {
 
+    public CharacterController characterController;
+
 	// Use this for initialization
 	void Start () {
-	
+
+        Physics.IgnoreLayerCollision(9, 8, true);
+
+        characterController = gameObject.transform.GetComponent<CharacterController>();
 	}
 	
 	// Update is called once per frame
@@ -14,27 +19,31 @@ public class PlayerMove : MonoBehaviour {
 		//Movement code
 		Vector3 velocity = new Vector3 (0, 0, 0);
 
-		if (Input.GetKey (KeyCode.A)) 
-		{
-			velocity.x -= 0.2f;
-		}
-		if (Input.GetKey (KeyCode.S)) 
-		{
-			velocity.z -= 0.2f;
-		}
-		if (Input.GetKey (KeyCode.D)) 
-		{
-			velocity.x += 0.2f;
-		}
-		if (Input.GetKey (KeyCode.W)) 
-		{
-			velocity.z += 0.2f;
-		}
+        if (characterController.isGrounded)
+        {
+            if (Input.GetKey(KeyCode.A))
+            {
+                velocity.x -= 1;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                velocity.z -= 1;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                velocity.x += 1;
+            }
+            if (Input.GetKey(KeyCode.W))
+            {
+                velocity.z += 1;
+            }
+            velocity *= 1000.0f;
+        }
 
+		//transform.Translate (velocity);
+        velocity.y -= 10000 * Time.deltaTime;
+        characterController.Move(velocity * Time.deltaTime);
 
-		transform.Translate (velocity);
-
-		//Camera.main.transform.position = new Vector3 (transform.position.x, transform.position.y, Camera.main.transform.position.z);
 	}
 
 }
