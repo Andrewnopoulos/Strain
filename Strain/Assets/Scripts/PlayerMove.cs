@@ -40,6 +40,12 @@ public class PlayerMove : MonoBehaviour {
             velocity = Vector3.Normalize(velocity) * 10.0f;
         }
 
+        // // Pause testing
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    Time.timeScale = 0;
+        //}
+
 		//transform.Translate (velocity);
         velocity.y -= 500 * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
