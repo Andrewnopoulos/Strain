@@ -5,11 +5,7 @@ public class TransparencyScript : MonoBehaviour {
 
     public GameObject player;
 
-    public Shader oldShader;
-
 	void Start () {
-
-        oldShader = Shader.Find("Standard");
 
 	}
 	

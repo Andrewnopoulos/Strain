@@ -67,15 +67,15 @@ public class ZombieSpawner : MonoBehaviour {
         float randX = Random.Range(player.transform.position.x - range,player.transform.position.x + range);
         float randY = Random.Range(player.transform.position.y - range,player.transform.position.y + range);
 
-        if (randX < player.transform.position.x + 50 && randX > player.transform.position.x)
-            randX = player.transform.position.y + 50;
-        else if (randX < player.transform.position.x && randX > player.transform.position.x - 50)
-            randX = player.transform.position.y - 50;
+        if (randX < player.transform.position.x + 30 && randX > player.transform.position.x)
+            randX = player.transform.position.y + 30;
+        else if (randX < player.transform.position.x && randX > player.transform.position.x - 30)
+            randX = player.transform.position.y - 30;
 
-        if (randY < player.transform.position.y + 50 && randY > player.transform.position.y)
-            randY = player.transform.position.y + 50;
-        else if (randY < player.transform.position.y && randY > player.transform.position.y - 50)
-            randY = player.transform.position.y - 50;
+        if (randY < player.transform.position.y + 30 && randY > player.transform.position.y)
+            randY = player.transform.position.y + 30;
+        else if (randY < player.transform.position.y && randY > player.transform.position.y - 30)
+            randY = player.transform.position.y - 30;
 
         return new Vector3(randX, 1, randY);
 	}
