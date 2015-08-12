@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		float distance = 5000;
+		float distance = 500;
 
 		layermask = ((1 << 10) | (1 << 11) | (1 << 12));
 
@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour {
 
 		ray = new Ray (transform.position, transform.forward);
 		RaycastHit hit;
-		if (Physics.Raycast (ray, out hit, 10000, layermask))
+		if (Physics.Raycast (ray, out hit, 1000, layermask))
 		{
 			collidedObject = hit.collider.gameObject;
 

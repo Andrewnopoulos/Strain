@@ -37,11 +37,11 @@ public class PlayerMove : MonoBehaviour {
             {
                 velocity.z += 1;
             }
-            velocity = Vector3.Normalize(velocity) * 500.0f;
+            velocity = Vector3.Normalize(velocity) * 10.0f;
         }
 
 		//transform.Translate (velocity);
-        velocity.y -= 10000 * Time.deltaTime;
+        velocity.y -= 500 * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
 
 	}
