@@ -10,6 +10,7 @@ public class NPC : MonoBehaviour {
         private static int length = 6;
         public static float mutationRate = 0.05f;
         public static float mutationStrength = 0.1f; // maximum mutation strength
+        public static float randomInitValue = 0.4f;
 
           /*
           * [0] - speed
@@ -24,6 +25,14 @@ public class NPC : MonoBehaviour {
         private float topGene = 0;
         private int topIndex = -1;
 
+        public Chromosome()
+        {
+            // initialize chromosome with random values between 0 and 0.4f
+            for (int i = 0; i < length; i++)
+            {
+                genes[i] = Random.Range(0.0f, randomInitValue);
+            }
+        }
         public Chromosome(float[] input)
         {
             if (input.Length != length)
@@ -41,6 +50,16 @@ public class NPC : MonoBehaviour {
             }
 
             EvaluateStrength();
+        }
+
+        public float Get(int index)
+        {
+            if (index >= length)
+            {
+                return 0;
+            }
+
+            return genes[index];
         }
 
         // code for blending two virus chromosomes
@@ -67,8 +86,10 @@ public class NPC : MonoBehaviour {
 
             if (out1.EvaluateStrength() > out2.EvaluateStrength())
             {
+                out1.Mutate();
                 return out1;
             }
+            out2.Mutate();
             return out2;
         }
 
