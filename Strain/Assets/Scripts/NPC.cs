@@ -3,8 +3,10 @@ using System.Collections;
 
 public class NPC : MonoBehaviour {
 
-    // chromosome class that contains virus values and crossover/mutation methods
-    // currently unable to change genes after the chromosome is created (except by mutation)
+    /// <summary>
+    /// chromosome class that contains virus values and crossover/mutation methods
+    /// currently unable to change genes after the chromosome is created (except by mutation)
+    /// </summary>
     private class Chromosome
     {
         private static int length = 6;
@@ -12,19 +14,13 @@ public class NPC : MonoBehaviour {
         public static float mutationStrength = 0.1f; // maximum mutation strength
         public static float randomInitValue = 0.4f;
 
-          /*
-          * [0] - speed
-          * [1] - health
-          * [2] - damage
-          * [3] - infectivity
-          * [4] - sight
-          * [5] - sound
-          * [6] - smell
-          */
         private float[] genes = new float[length];
         private float topGene = 0;
         private int topIndex = -1;
 
+        /// <summary>
+        /// Initializes randomly generated chromosome based on an inbuilt randomInitValue
+        /// </summary>
         public Chromosome()
         {
             // initialize chromosome with random values between 0 and 0.4f
@@ -32,7 +28,27 @@ public class NPC : MonoBehaviour {
             {
                 genes[i] = Random.Range(0.0f, randomInitValue);
             }
+            EvaluateStrength();
         }
+
+        /// <summary>
+        /// Initialized a chromosome where every gene is the initial value
+        /// </summary>
+        /// <param name="initValue"></param>
+        public Chromosome(float initValue)
+        {
+            for (int i = 0; i < length; i++)
+            {
+                genes[i] = initValue;
+            }
+            EvaluateStrength();
+        }
+
+        /// <summary>
+        /// Initialized a chromosome based on an input array.
+        /// If input array is wrong length, initializes a zero value chromosome
+        /// </summary>
+        /// <param name="input"></param>
         public Chromosome(float[] input)
         {
             if (input.Length != length)
@@ -52,6 +68,18 @@ public class NPC : MonoBehaviour {
             EvaluateStrength();
         }
 
+        /// <summary>
+        /// [0] - speed
+        /// [1] - health
+        /// [2] - damage
+        /// [3] - infectivity
+        /// [4] - sight
+        /// [5] - sound
+        /// [6] - smell
+        /// </summary>
+        /// <param name="index">Index of the gene to retrieve the value of</param>
+        /// <returns>Value of the gene at the requested index.
+        /// Returns 0 if index exceeds chromosome length</returns>
         public float Get(int index)
         {
             if (index >= length)
@@ -62,9 +90,22 @@ public class NPC : MonoBehaviour {
             return genes[index];
         }
 
-        // code for blending two virus chromosomes
-        // if player is already infected by one strain and is again bitten,
-        // the strains can crossover
+        /// <summary>
+        /// Returns the length of the chromosomes
+        /// </summary>
+        /// <returns>Chromosome length</returns>
+        public static int GetLength()
+        {
+            return length;
+        }
+
+        /// <summary>
+        /// code for blending two virus chromosomes
+        /// if player is already infected by one strain and is again bitten,
+        /// the strains can crossover
+        /// </summary>
+        /// <param name="input">Input chromosome to perform crossover with</param>
+        /// <returns>Child chromosome</returns>
         public Chromosome Crossover(Chromosome input)
         {
             int crossoverPoint = Random.Range(0, length-1);
@@ -93,7 +134,9 @@ public class NPC : MonoBehaviour {
             return out2;
         }
 
-        // Mutates chromosome, then re-evaluates its strength
+        /// <summary>
+        /// Mutates chromosome, then re-evaluates its strength
+        /// </summary>
         public void Mutate()
         {
             // TODO mutation code that is more dependent on what the max value is
@@ -109,7 +152,11 @@ public class NPC : MonoBehaviour {
             EvaluateStrength();
         }
 
-        // returns the maximum value
+        /// <summary>
+        /// Evaluates the highest value in the chromosome, storing and returning that value.
+        /// If it's recently calculated the strength, it will simply return the pre-calculated strength value.
+        /// </summary>
+        /// <returns></returns>
         public float EvaluateStrength()
         {
             if (topIndex != -1)
@@ -154,11 +201,15 @@ public class NPC : MonoBehaviour {
 	public Material red;
 	public Material green;
 
+    private Chromosome virusStrain;
+    private int chromosomeLength;
 
 	// Use this for initialization
 	void Start () {
-
+        chromosomeLength = Chromosome.GetLength();
 		zombieSpawnerReference = groundReference.GetComponent<ZombieSpawner>();
+
+        virusStrain = new Chromosome(0.0f);
 		
 		navComponent = this.transform.GetComponent<NavMeshAgent> ();
 		speed = navComponent.speed;
