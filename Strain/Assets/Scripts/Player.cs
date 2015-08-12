@@ -14,7 +14,7 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
@@ -134,6 +134,8 @@ public class Player : MonoBehaviour {
         gun.GetComponent<AssaultRifle>().enabled = false;
         gun.GetComponent<Shotgun>().enabled = false;
 
+        gun.GetComponent<MeshRenderer>().enabled = true;
+
         gun.GetComponent<Pistol>().holsterCooldown = gun.GetComponent<Pistol>().holsterRate;
     }
     void SwitchToRifle()
@@ -145,6 +147,8 @@ public class Player : MonoBehaviour {
 
         gun.GetComponent<Pistol>().enabled = false;
         gun.GetComponent<Shotgun>().enabled = false;
+
+        gun.GetComponent<MeshRenderer>().enabled = true;
 
         gun.GetComponent<AssaultRifle>().holsterCooldown = gun.GetComponent<AssaultRifle>().holsterRate;
     }
@@ -159,6 +163,8 @@ public class Player : MonoBehaviour {
         gun.GetComponent<Pistol>().enabled = false;
         gun.GetComponent<AssaultRifle>().enabled = false;
 
+        gun.GetComponent<MeshRenderer>().enabled = true;
+
         gun.GetComponent<Shotgun>().holsterCooldown = gun.GetComponent<Shotgun>().holsterRate;
     }
 
@@ -170,6 +176,8 @@ public class Player : MonoBehaviour {
 
     void Die()
     {
+
+        Application.LoadLevel("MainMenu");
 
     }
 }
