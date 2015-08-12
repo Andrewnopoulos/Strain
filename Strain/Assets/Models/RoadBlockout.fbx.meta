@@ -6,10 +6,99 @@ ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
+    100002: GroundPlane1
+    100004: GroundPlane10
+    100006: GroundPlane11
+    100008: GroundPlane12
+    100010: GroundPlane13
+    100012: GroundPlane14
+    100014: GroundPlane15
+    100016: GroundPlane16
+    100018: GroundPlane17
+    100020: GroundPlane2
+    100022: GroundPlane3
+    100024: GroundPlane4
+    100026: GroundPlane5
+    100028: GroundPlane6
+    100030: GroundPlane7
+    100032: GroundPlane8
+    100034: GroundPlane9
+    100036: Road_Blockout
     400000: //RootNode
+    400002: GroundPlane1
+    400004: GroundPlane10
+    400006: GroundPlane11
+    400008: GroundPlane12
+    400010: GroundPlane13
+    400012: GroundPlane14
+    400014: GroundPlane15
+    400016: GroundPlane16
+    400018: GroundPlane17
+    400020: GroundPlane2
+    400022: GroundPlane3
+    400024: GroundPlane4
+    400026: GroundPlane5
+    400028: GroundPlane6
+    400030: GroundPlane7
+    400032: GroundPlane8
+    400034: GroundPlane9
+    400036: Road_Blockout
     2300000: //RootNode
+    2300002: GroundPlane1
+    2300004: GroundPlane10
+    2300006: GroundPlane11
+    2300008: GroundPlane12
+    2300010: GroundPlane13
+    2300012: GroundPlane14
+    2300014: GroundPlane15
+    2300016: GroundPlane16
+    2300018: GroundPlane17
+    2300020: GroundPlane2
+    2300022: GroundPlane3
+    2300024: GroundPlane4
+    2300026: GroundPlane5
+    2300028: GroundPlane6
+    2300030: GroundPlane7
+    2300032: GroundPlane8
+    2300034: GroundPlane9
+    2300036: Road_Blockout
     3300000: //RootNode
+    3300002: GroundPlane1
+    3300004: GroundPlane10
+    3300006: GroundPlane11
+    3300008: GroundPlane12
+    3300010: GroundPlane13
+    3300012: GroundPlane14
+    3300014: GroundPlane15
+    3300016: GroundPlane16
+    3300018: GroundPlane17
+    3300020: GroundPlane2
+    3300022: GroundPlane3
+    3300024: GroundPlane4
+    3300026: GroundPlane5
+    3300028: GroundPlane6
+    3300030: GroundPlane7
+    3300032: GroundPlane8
+    3300034: GroundPlane9
+    3300036: Road_Blockout
     4300000: Road_Blockout
+    4300002: GroundPlane1
+    4300004: GroundPlane2
+    4300006: GroundPlane3
+    4300008: GroundPlane4
+    4300010: GroundPlane5
+    4300012: GroundPlane6
+    4300014: GroundPlane7
+    4300016: GroundPlane8
+    4300018: GroundPlane9
+    4300020: GroundPlane10
+    4300022: GroundPlane11
+    4300024: GroundPlane12
+    4300026: GroundPlane13
+    4300028: GroundPlane14
+    4300030: GroundPlane15
+    4300032: GroundPlane16
+    4300034: GroundPlane17
   materials:
     importMaterials: 0
     materialName: 0
@@ -38,7 +127,7 @@ ModelImporter:
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0

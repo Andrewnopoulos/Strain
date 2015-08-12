@@ -19,7 +19,7 @@ public class PlayerRotate : MonoBehaviour {
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 		RaycastHit hit;
 		float distance = 0.0f;
-		if (Physics.Raycast (ray, out hit, 10000, layermask)) 
+		if (Physics.Raycast (ray, out hit, 1000, layermask)) 
 		{
 			distance = hit.distance;
 		}

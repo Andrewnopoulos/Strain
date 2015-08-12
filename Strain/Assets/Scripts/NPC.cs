@@ -236,7 +236,7 @@ public class NPC : MonoBehaviour {
 				navComponent.SetDestination(target.position);
 			}
 			
-			if ((target.position - transform.position).magnitude < 100 && biteCooldown <= 0) {
+			if ((target.position - transform.position).magnitude < 2 && biteCooldown <= 0) {
 				BiteHuman();
 			}
 		} 
@@ -245,11 +245,11 @@ public class NPC : MonoBehaviour {
 
             FindNearestZombie();
 
-            if ((transform.position - target.position).magnitude < 2000)
+            if ((transform.position - target.position).magnitude < 100)
             {
                 Flee();
             }
-			if((transform.position - targetPosition).magnitude < 100)
+			if((transform.position - targetPosition).magnitude < 2)
 			{ 
 				Wander(); 
 			}
@@ -283,7 +283,7 @@ public class NPC : MonoBehaviour {
 
 	void Wander()
 	{
-        targetPosition = Random.insideUnitSphere * 10000;
+        targetPosition = Random.insideUnitSphere * 100;
 		targetPosition = new Vector3 (targetPosition.x, transform.position.y, targetPosition.z);
 	}
 
@@ -356,6 +356,6 @@ public class NPC : MonoBehaviour {
 	void Flee()
 	{
         Vector3 fleeDir = transform.position - target.position;
-        targetPosition = transform.position + (Vector3.Normalize(fleeDir) * 1000);
+        targetPosition = transform.position + (Vector3.Normalize(fleeDir) * 100);
 	}
 }
