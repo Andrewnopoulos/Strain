@@ -37,7 +37,7 @@ public class PlayerMove : MonoBehaviour {
             {
                 velocity.z += 1;
             }
-            velocity *= 500.0f;
+            velocity = Vector3.Normalize(velocity) * 500.0f;
         }
 
 		//transform.Translate (velocity);
