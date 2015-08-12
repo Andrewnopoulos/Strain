@@ -201,7 +201,7 @@ public class NPC : MonoBehaviour {
 	public Material red;
 	public Material green;
 
-    public Chromosome virusStrain;
+    private Chromosome virusStrain;
     private int chromosomeLength;
 
 	// Use this for initialization
