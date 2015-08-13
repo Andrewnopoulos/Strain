@@ -5,6 +5,7 @@ public class PlayerRotate : MonoBehaviour {
 
 	// Use this for initialization
 	//LayerMask layer;
+    public Vector3 mouseInWorld;
 
 	int layermask = 1;
 
@@ -24,6 +25,7 @@ public class PlayerRotate : MonoBehaviour {
 			distance = hit.distance;
 		}
 		transform.LookAt (ray.GetPoint (distance), Vector3.up);
+        mouseInWorld = ray.GetPoint(distance);
 
 	}
 }

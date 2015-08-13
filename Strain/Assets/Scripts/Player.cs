@@ -12,6 +12,9 @@ public class Player : MonoBehaviour {
     public bool hasShotgun = false;
     public bool hasFlamethrower = false;
 
+    public float maxStamina = 100.0f;
+    public float currentStamina = 100.0f;
+
 	// Use this for initialization
 	void Start () {
 
@@ -19,6 +22,13 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (currentStamina < maxStamina)
+        {
+            currentStamina += 15 * Time.deltaTime;
+            if (currentStamina > maxStamina)
+                currentStamina = maxStamina;
+        }
 
         if (Input.GetKeyDown(KeyCode.Q))
         {

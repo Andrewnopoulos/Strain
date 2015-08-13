@@ -48,7 +48,7 @@ public class LootSpawn : MonoBehaviour {
     void SpawnLoot()
     {
         if (currentLoot.gameObject != null)
-            Destroy(currentLoot.gameObject);
+            return;
 
         if (Random.Range(0, 100) < lootSpawnChance)
         {
