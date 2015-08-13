@@ -2,6 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 
+public enum GAMEMODE
+{
+    SHOOTAEN = 0,
+    SIMULATAEN = 1,
+    PAUSED = 2
+}
+
 public class ZombieSpawner : MonoBehaviour {
 
 	public GameObject npcprefab;
@@ -22,44 +29,28 @@ public class ZombieSpawner : MonoBehaviour {
 
 	public List<GameObject> npcList;
 
+    public GAMEMODE currentMode;
+
 	// Use this for initialization
 	void Start () {
-
-		zombieSpawnCooldown = zombieSpawnRate;
-		humanSpawnCooldown = humanSpawnRate;
-
-		while (currentZombie < maxZombie) 
-		{
-            SpawnZombie(RandomPos(80));
-		}
-
-		while (currentHuman < maxHuman) 
-		{
-            SpawnHuman(RandomPos(80));
-		}
-
-		npcList.Add (player);
+        currentMode = GAMEMODE.PAUSED;
+       // ShootingStart();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
-		zombieSpawnCooldown -= Time.deltaTime;
-		humanSpawnCooldown -= Time.deltaTime;
-
-		if (zombieSpawnCooldown <= 0 && currentZombie < maxZombie) 
-		{
-			zombieSpawnCooldown  = zombieSpawnRate;
-
-            SpawnZombie(RandomPos(80));
-		}
-
-		if (humanSpawnCooldown <= 0 && currentHuman < maxHuman) 
-		{
-			humanSpawnCooldown  = humanSpawnRate;
-
-            SpawnHuman(RandomPos(80));
-		}
+        switch(currentMode)
+        {
+            case GAMEMODE.SHOOTAEN:
+                ShootingUpdate();
+                break;
+            case GAMEMODE.SIMULATAEN:
+                SimulationUpdate();
+                break;
+            case GAMEMODE.PAUSED:
+                PausedUpdate();
+                break;
+        }
 	}
 
     Vector3 RandomVec3(float range)
@@ -109,4 +100,58 @@ public class ZombieSpawner : MonoBehaviour {
 
 		currentZombie++;
 	}
+
+    public void SimulationStart()
+    {
+
+    }
+
+    public void ShootingStart()
+    {
+        zombieSpawnCooldown = zombieSpawnRate;
+        humanSpawnCooldown = humanSpawnRate;
+
+        while (currentZombie < maxZombie)
+        {
+            SpawnZombie(RandomPos(80));
+        }
+
+        while (currentHuman < maxHuman)
+        {
+            SpawnHuman(RandomPos(80));
+        }
+
+        npcList.Add(player);
+    }
+
+    void SimulationUpdate()
+    {
+
+    }
+
+    void ShootingUpdate()
+    {
+        zombieSpawnCooldown -= Time.deltaTime;
+        humanSpawnCooldown -= Time.deltaTime;
+
+        if (zombieSpawnCooldown <= 0 && currentZombie < maxZombie)
+        {
+            zombieSpawnCooldown = zombieSpawnRate;
+
+            SpawnZombie(RandomPos(80));
+        }
+
+        if (humanSpawnCooldown <= 0 && currentHuman < maxHuman)
+        {
+            humanSpawnCooldown = humanSpawnRate;
+
+            SpawnHuman(RandomPos(80));
+        }
+    }
+
+    void PausedUpdate()
+    {
+        Time.timeScale = 0;
+    }
+
 }
