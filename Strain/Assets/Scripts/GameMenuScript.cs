@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GameMenuScript : MonoBehaviour {
 
-    public ZombieSpawner spawner;
+    public GameObject spawner;
     public GameObject self;
 
 	// Use this for initialization
@@ -13,7 +13,7 @@ public class GameMenuScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    if (spawner.currentMode != GAMEMODE.PAUSED)
+	    if (spawner.GetComponent<ZombieSpawner>().currentMode != GAMEMODE.PAUSED)
         {
             self.SetActive(false);
         }
