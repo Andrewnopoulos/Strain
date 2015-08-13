@@ -381,8 +381,12 @@ public class NPC : MonoBehaviour {
 
 			if ((human.transform.position - transform.position).magnitude < smallestDist)
 			{
-				smallestDist = (human.transform.position - transform.position).magnitude;
-				target = human.transform;
+                NPC script = target.GetComponent<NPC>();
+                if (!script.incubating)
+                {
+                    smallestDist = (human.transform.position - transform.position).magnitude;
+                    target = human.transform;
+                }
 			}
 		}
 	}
