@@ -84,6 +84,8 @@ public class GunClass : MonoBehaviour {
                     //instantiate bullet prefab in direction player is facing
                     GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation) as GameObject;
 
+                    newBullet.transform.LookAt(gameObject.GetComponentInParent<PlayerRotate>().mouseInWorld);
+
                     //make a slight offset to rotation
                     float randX = Random.Range(-bulletDeviation, bulletDeviation);
                     newBullet.transform.Rotate(new Vector3(0, 1, 0), randX);

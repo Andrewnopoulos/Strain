@@ -6,6 +6,7 @@ public class UIScript : MonoBehaviour {
 
     public GameObject healthBar;
     public Text weapon;
+    public Text ammo;
 
     public GameObject player;
 
@@ -27,18 +28,22 @@ public class UIScript : MonoBehaviour {
         if (player.GetComponentInChildren<Pistol>().enabled)
         {
             weapon.text = "Pistol";
+            ammo.text = player.GetComponentInChildren<Pistol>().totalAmmo.ToString();
         }
         else if (player.GetComponentInChildren<AssaultRifle>().enabled)
         {
             weapon.text = "Assualt Rifle";
+            ammo.text = player.GetComponentInChildren<AssaultRifle>().totalAmmo.ToString();
         }
         else if (player.GetComponentInChildren<Shotgun>().enabled)
         {
             weapon.text = "Shotgun";
+            ammo.text = player.GetComponentInChildren<Shotgun>().totalAmmo.ToString();
         }
         else
         {
             weapon.text = "No Weapon";
+            ammo.text = "";
         }
 	}
 }
