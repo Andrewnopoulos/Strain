@@ -265,7 +265,7 @@ public class NPC : MonoBehaviour {
 
             FindNearestZombie();
 
-            if ((transform.position - target.position).magnitude < 100)
+            if ((transform.position - target.position).magnitude < 10)
             {
                 Flee();
             }
@@ -404,6 +404,6 @@ public class NPC : MonoBehaviour {
 	void Flee()
 	{
         Vector3 fleeDir = transform.position - target.position;
-        targetPosition = transform.position + (Vector3.Normalize(fleeDir) * 100);
+        targetPosition = transform.position + (Vector3.Normalize(fleeDir) * 10);
 	}
 }
