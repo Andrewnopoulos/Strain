@@ -344,6 +344,7 @@ public class NPC : MonoBehaviour {
         // sets the incubation time if it's not already incubating
         if (!incubating)
         {
+            incubating = true;
             incubationTime = maxIncubation - virusStrain.Get(4) * varianceIncubation;
         }
     }
@@ -381,11 +382,19 @@ public class NPC : MonoBehaviour {
 
 			if ((human.transform.position - transform.position).magnitude < smallestDist)
 			{
-                NPC script = target.GetComponent<NPC>();
-                if (!script.incubating)
+                if (human.tag == "Player")
                 {
                     smallestDist = (human.transform.position - transform.position).magnitude;
                     target = human.transform;
+                }
+                else
+                {
+                    NPC script = human.GetComponent<NPC>();
+                    if (!script.incubating)
+                    {
+                        smallestDist = (human.transform.position - transform.position).magnitude;
+                        target = human.transform;
+                    }
                 }
 			}
 		}

@@ -13,7 +13,7 @@ public class LootSpawn : MonoBehaviour {
     public GameObject currentLoot;
 
     //out of 100
-    public float lootSpawnChance = 25;
+    public float lootSpawnChance = 50;
 
     //must add up to 100
     private float pistolPickupChance = 10;

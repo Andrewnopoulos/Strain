@@ -59,7 +59,7 @@ public class Player : MonoBehaviour {
         {
             if (hasPistol)
             {
-                gun.GetComponent<Pistol>().totalAmmo += other.GetComponent<Pistol>().currentClipAmmo;
+                gun.GetComponent<Pistol>().totalAmmo += gun.GetComponent<Pistol>().maxClipAmmo;
             }
             else
             {
@@ -73,7 +73,7 @@ public class Player : MonoBehaviour {
         {
             if (hasRifle)
             {
-                gun.GetComponent<AssaultRifle>().totalAmmo += other.GetComponent<AssaultRifle>().currentClipAmmo;
+                gun.GetComponent<AssaultRifle>().totalAmmo += gun.GetComponent<AssaultRifle>().maxClipAmmo;
             }
             else
             {
@@ -87,7 +87,7 @@ public class Player : MonoBehaviour {
         {
             if (hasShotgun)
             {
-                gun.GetComponent<Shotgun>().totalAmmo += other.GetComponent<Shotgun>().currentClipAmmo;
+                gun.GetComponent<Shotgun>().totalAmmo += gun.GetComponent<Shotgun>().maxClipAmmo;
             }
             else
             {
