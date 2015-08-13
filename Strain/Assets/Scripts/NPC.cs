@@ -7,10 +7,10 @@ public class NPC : MonoBehaviour {
     /// chromosome class that contains virus values and crossover/mutation methods
     /// currently unable to change genes after the chromosome is created (except by mutation)
     /// </summary>
-    private class Chromosome
+    public class Chromosome
     {
         private static int length = 8;
-        public static float mutationRate = 0.05f;
+        public static float mutationRate = 0.2f;
         public static float mutationStrength = 0.1f; // maximum mutation strength
         public static float randomInitValue = 0.4f;
 

@@ -93,8 +93,8 @@ public class GunClass : MonoBehaviour {
                     script.damage = damage;
 
                     shotCooldown = fireRate;
-                    currentClipAmmo -= 1;
                 }
+                currentClipAmmo -= 1;
 			}
 		}
         else if (Input.GetKeyDown(KeyCode.R))

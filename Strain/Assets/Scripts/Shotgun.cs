@@ -14,7 +14,7 @@ public class Shotgun : GunClass {
         shotCooldown = fireRate;
         damage = 18.0f;
         totalAmmo = 0;
-        maxClipAmmo = 64;
+        maxClipAmmo = 8;
         currentClipAmmo = maxClipAmmo;
         reloadTime = 3.0f;
         currentReloadTime = reloadTime;
