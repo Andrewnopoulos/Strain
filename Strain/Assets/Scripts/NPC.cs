@@ -228,7 +228,7 @@ public class NPC : MonoBehaviour {
     public float varianceDamage = 30;
     public float minInfectivity = 40;
     public float varianceInfectivity = 60;
-    public float minIncubation = 1;
+    public float maxIncubation = 150;
     public float varianceIncubation = 149;
 
 	// Use this for initialization
@@ -344,7 +344,7 @@ public class NPC : MonoBehaviour {
         // sets the incubation time if it's not already incubating
         if (!incubating)
         {
-            incubationTime = minIncubation + virusStrain.Get(4) * varianceIncubation;
+            incubationTime = maxIncubation - virusStrain.Get(4) * varianceIncubation;
         }
     }
 
@@ -360,6 +360,9 @@ public class NPC : MonoBehaviour {
 		gameObject.tag = "Zombie";
 		gameObject.layer = 10;
 		myMat.material = red;
+
+        zombieSpawnerReference.currentZombie++;
+        zombieSpawnerReference.currentHuman--;
 
         UpdateStats();
 
@@ -378,8 +381,12 @@ public class NPC : MonoBehaviour {
 
 			if ((human.transform.position - transform.position).magnitude < smallestDist)
 			{
-				smallestDist = (human.transform.position - transform.position).magnitude;
-				target = human.transform;
+                NPC script = target.GetComponent<NPC>();
+                if (!script.incubating)
+                {
+                    smallestDist = (human.transform.position - transform.position).magnitude;
+                    target = human.transform;
+                }
 			}
 		}
 	}
@@ -411,8 +418,6 @@ public class NPC : MonoBehaviour {
                 if (Random.Range(0, 100) < infectivity) // probability of infecting the person they're biting
                 {
                     script.Infect(virusStrain);
-                    zombieSpawnerReference.currentZombie++;
-                    zombieSpawnerReference.currentHuman--;
                 }
 
                 script.health -= damage;
