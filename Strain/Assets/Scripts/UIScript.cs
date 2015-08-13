@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class UIScript : MonoBehaviour {
 
     public GameObject healthBar;
+    public Text weapon;
 
     public GameObject player;
 
@@ -22,6 +24,21 @@ public class UIScript : MonoBehaviour {
         healthBar.transform.localScale = new Vector3(400 * playerscript.health / 100, 1, 1);
         healthBar.transform.localPosition = new Vector3(-500 + (healthBar.transform.localScale.x / 2), -200, 0);
 
-        //-500 + (healthBar.transform.localScale.x / 2)
+        if (player.GetComponentInChildren<Pistol>().enabled)
+        {
+            weapon.text = "Pistol";
+        }
+        else if (player.GetComponentInChildren<AssaultRifle>().enabled)
+        {
+            weapon.text = "Assualt Rifle";
+        }
+        else if (player.GetComponentInChildren<Shotgun>().enabled)
+        {
+            weapon.text = "Shotgun";
+        }
+        else
+        {
+            weapon.text = "No Weapon";
+        }
 	}
 }

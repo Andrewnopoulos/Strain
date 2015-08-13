@@ -57,22 +57,43 @@ public class Player : MonoBehaviour {
     {
         if (other.tag == "PistolPickup")
         {
-            hasPistol = true;
-            SwitchToPistol();
+            if (hasPistol)
+            {
+                gun.GetComponent<Pistol>().totalAmmo += other.GetComponent<Pistol>().currentClipAmmo;
+            }
+            else
+            {
+                hasPistol = true;
+                SwitchToPistol();
+            }
 
             Destroy(other.gameObject);
         }
         else if (other.tag == "RiflePickup")
         {
-            hasRifle = true;
-            SwitchToRifle();
+            if (hasRifle)
+            {
+                gun.GetComponent<AssaultRifle>().totalAmmo += other.GetComponent<AssaultRifle>().currentClipAmmo;
+            }
+            else
+            {
+                hasRifle = true;
+                SwitchToRifle();
+            }
 
             Destroy(other.gameObject);
         }
         else if (other.tag == "ShotgunPickup")
         {
-            hasShotgun = true;
-            SwitchToShotgun();
+            if (hasShotgun)
+            {
+                gun.GetComponent<Shotgun>().totalAmmo += other.GetComponent<Shotgun>().currentClipAmmo;
+            }
+            else
+            {
+                hasShotgun = true;
+                SwitchToShotgun();
+            }
 
             Destroy(other.gameObject);
         }
@@ -80,6 +101,27 @@ public class Player : MonoBehaviour {
         {
             hasFlamethrower = true;
             SwitchToFlamethrower();
+
+            Destroy(other.gameObject);
+        }
+        else if (other.tag == "PistolBullets")
+        {
+            Ammunition script = other.GetComponent<Ammunition>();
+            gun.GetComponent<Pistol>().totalAmmo += script.ammo;
+
+            Destroy(other.gameObject);
+        }
+        else if (other.tag == "RifleBullets")
+        {
+            Ammunition script = other.GetComponent<Ammunition>();
+            gun.GetComponent<AssaultRifle>().totalAmmo += script.ammo;
+
+            Destroy(other.gameObject);
+        }
+         else if (other.tag == "ShotgunBullets")
+        {
+            Ammunition script = other.GetComponent<Ammunition>();
+            gun.GetComponent<Shotgun>().totalAmmo += script.ammo;
 
             Destroy(other.gameObject);
         }

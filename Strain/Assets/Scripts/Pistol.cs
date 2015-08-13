@@ -9,12 +9,12 @@ public class Pistol : GunClass
 
         shotCount = 1;
         bulletDeviation = 0.5f;
-        holsterRate = 1.5f;
+        holsterRate = 0.5f;
         holsterCooldown = holsterRate;
 		fireRate = 0.6f;
 		shotCooldown = fireRate;
 		damage = 35.0f;
-		totalAmmo = 64;
+		totalAmmo = 0;
 		maxClipAmmo = 8;
 		currentClipAmmo = maxClipAmmo;
 		reloadTime = 2.0f;
