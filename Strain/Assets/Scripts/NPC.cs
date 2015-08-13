@@ -69,12 +69,12 @@ public class NPC : MonoBehaviour {
         }
 
         /// <summary>
-        /// [0] - speed
-        /// [1] - health
-        /// [2] - damage
-        /// [3] - infectivity
-        /// [4] - sight
-        /// [5] - sound
+        /// [0] - speed<para />
+        /// [1] - health<para />
+        /// [2] - damage<para />
+        /// [3] - infectivity<para />
+        /// [4] - sight<para />
+        /// [5] - sound<para />
         /// [6] - smell
         /// </summary>
         /// <param name="index">Index of the gene to retrieve the value of</param>
@@ -108,6 +108,16 @@ public class NPC : MonoBehaviour {
         /// <returns>Child chromosome</returns>
         public Chromosome Crossover(Chromosome input)
         {
+            // if either chromosome is zero, return the other one
+            if (input.EvaluateStrength() == 0)
+            {
+                return this;
+            }else if (EvaluateStrength() == 0)
+            {
+                return input;
+            }
+
+            // find crossover point and perform crossover
             int crossoverPoint = Random.Range(0, length-1);
             float[] output1 = new float[length];
             float[] output2 = new float[length];
@@ -125,6 +135,7 @@ public class NPC : MonoBehaviour {
             Chromosome out1 = new Chromosome(output1);
             Chromosome out2 = new Chromosome(output2);
 
+            // mutate and return chromosome with a higher max value
             if (out1.EvaluateStrength() > out2.EvaluateStrength())
             {
                 out1.Mutate();
@@ -184,6 +195,7 @@ public class NPC : MonoBehaviour {
 	public float speed;
     public float health;
     public float damage;
+    public float infectivity;
 
     public float biteSpeed;
     private float biteCooldown = 0;
@@ -204,15 +216,23 @@ public class NPC : MonoBehaviour {
     private Chromosome virusStrain;
     private int chromosomeLength;
 
+    public float minSpeed;
+    public float varianceSpeed;
+    public float minHealth;
+    public float varianceHealth;
+    public float minDamage;
+    public float varianceDamage;
+    public float minInfectivity;
+    public float varianceInfectivity;
+
 	// Use this for initialization
 	void Start () {
         chromosomeLength = Chromosome.GetLength();
 		zombieSpawnerReference = groundReference.GetComponent<ZombieSpawner>();
 
         virusStrain = new Chromosome(0.0f);
-		
-		navComponent = this.transform.GetComponent<NavMeshAgent> ();
-		speed = navComponent.speed;
+
+        UpdateStats();
 
 		if (!isZombie) {
 			Wander ();
@@ -271,6 +291,25 @@ public class NPC : MonoBehaviour {
 
 	}
 
+    /// <summary>
+    /// Updates NPC stats (speed, health, damage, infectivity) based on chromosome values
+    /// </summary>
+    private void UpdateStats()
+    {
+        speed = minSpeed + virusStrain.Get(0) * varianceSpeed;
+        navComponent = this.transform.GetComponent<NavMeshAgent>();
+        navComponent.speed = speed;
+
+        health = minHealth + virusStrain.Get(1) * varianceHealth;
+
+        damage = minDamage + virusStrain.Get(2) * varianceDamage;
+
+        infectivity = minInfectivity + virusStrain.Get(3) * varianceInfectivity;
+
+        // TODO check for values exceeding certain limits in here
+        // Place triggers for evolution here
+    }
+
 	public void KillYourself()
 	{
 		if (!isZombie)
@@ -287,12 +326,16 @@ public class NPC : MonoBehaviour {
 		targetPosition = new Vector3 (targetPosition.x, transform.position.y, targetPosition.z);
 	}
 
-	public void BecomeZombie()
+	private void BecomeZombie(Chromosome inputVirus)
 	{
 		isZombie = true;
 		gameObject.tag = "Zombie";
 		gameObject.layer = 10;
 		myMat.material = red;
+
+        virusStrain = virusStrain.Crossover(inputVirus);
+
+        UpdateStats();
 
         FindNearestHuman();
 	}
@@ -338,10 +381,13 @@ public class NPC : MonoBehaviour {
 		{
 			if (target.gameObject.tag == "Human")
 			{
-			    NPC script = target.GetComponent<NPC>();
-			    script.BecomeZombie();
-                zombieSpawnerReference.currentZombie++;
-                zombieSpawnerReference.currentHuman--;
+                if (Random.Range(0, 100) < infectivity) // probability of infecting the person they're biting
+                {
+                    NPC script = target.GetComponent<NPC>();
+                    script.BecomeZombie(virusStrain);
+                    zombieSpawnerReference.currentZombie++;
+                    zombieSpawnerReference.currentHuman--;
+                }
 			}
 			else if (target.gameObject.tag == "Player")
 			{
