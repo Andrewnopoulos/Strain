@@ -305,7 +305,6 @@ public class NPC : MonoBehaviour {
 		if (!alive) {
 			KillYourself();
 		}
-
 	}
 
     /// <summary>
@@ -325,6 +324,29 @@ public class NPC : MonoBehaviour {
 
         // TODO check for values exceeding certain limits in here
         // Place triggers for evolution here
+    }
+
+    public int GetChromosomeLength()
+    {
+        return chromosomeLength;
+    }
+
+    public void InitializeZombie(float[] initialValues)
+    {
+        if (initialValues.Length != chromosomeLength)
+        {
+            float[] randomValues = new float[chromosomeLength];
+            for (int i = 0; i < chromosomeLength; i++)
+            {
+                randomValues[i] = Random.Range(0, 0.2f);
+            }
+        }
+        else
+        {
+            virusStrain = new Chromosome(initialValues);
+        }
+
+        BecomeZombie();
     }
 
 	public void KillYourself()
