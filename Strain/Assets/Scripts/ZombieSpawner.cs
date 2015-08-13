@@ -103,11 +103,15 @@ public class ZombieSpawner : MonoBehaviour {
 
     public void SimulationStart()
     {
-
+        currentMode = GAMEMODE.SIMULATAEN;
+        Time.timeScale = 1;
     }
 
     public void ShootingStart()
     {
+        currentMode = GAMEMODE.SHOOTAEN;
+        Time.timeScale = 1;
+
         zombieSpawnCooldown = zombieSpawnRate;
         humanSpawnCooldown = humanSpawnRate;
 
