@@ -30,12 +30,12 @@ public class ZombieSpawner : MonoBehaviour {
 
 		while (currentZombie < maxZombie) 
 		{
-            SpawnZombie(RandomPos(100));
+            SpawnZombie(RandomPos(80));
 		}
 
 		while (currentHuman < maxHuman) 
 		{
-            SpawnHuman(RandomPos(100));
+            SpawnHuman(RandomPos(80));
 		}
 
 		npcList.Add (player);
@@ -51,33 +51,37 @@ public class ZombieSpawner : MonoBehaviour {
 		{
 			zombieSpawnCooldown  = zombieSpawnRate;
 
-            SpawnZombie(RandomPos(100));
+            SpawnZombie(RandomPos(80));
 		}
 
 		if (humanSpawnCooldown <= 0 && currentHuman < maxHuman) 
 		{
 			humanSpawnCooldown  = humanSpawnRate;
 
-            SpawnHuman(RandomPos(100));
+            SpawnHuman(RandomPos(80));
 		}
 	}
 
-	Vector3 RandomPos(float range)
-	{
-        float randX = Random.Range(player.transform.position.x - range,player.transform.position.x + range);
-        float randY = Random.Range(player.transform.position.y - range,player.transform.position.y + range);
-
-        if (randX < player.transform.position.x + 30 && randX > player.transform.position.x)
-            randX = player.transform.position.y + 30;
-        else if (randX < player.transform.position.x && randX > player.transform.position.x - 30)
-            randX = player.transform.position.y - 30;
-
-        if (randY < player.transform.position.y + 30 && randY > player.transform.position.y)
-            randY = player.transform.position.y + 30;
-        else if (randY < player.transform.position.y && randY > player.transform.position.y - 30)
-            randY = player.transform.position.y - 30;
+    Vector3 RandomVec3(float range)
+    {
+        float randX = Random.Range(-range, range);
+        float randY = Random.Range(-range, range);
 
         return new Vector3(randX, 1, randY);
+    }
+
+	Vector3 RandomPos(float range)
+	{
+        Vector3 position;
+        while (true)
+        {
+            position = RandomVec3(range);
+
+            if (Vector3.Magnitude(position - player.transform.position) > 30)
+                break;
+        }
+
+        return position;
 	}
 
 	void SpawnHuman(Vector3 position)

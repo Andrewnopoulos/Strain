@@ -322,7 +322,7 @@ public class NPC : MonoBehaviour {
 
 	void Wander()
 	{
-        targetPosition = Random.insideUnitSphere * 100;
+        targetPosition = Random.insideUnitSphere * 80;
 		targetPosition = new Vector3 (targetPosition.x, transform.position.y, targetPosition.z);
 	}
 

@@ -37,7 +37,7 @@ public class PlayerMove : MonoBehaviour {
             {
                 velocity.z += 1;
             }
-            velocity = Vector3.Normalize(velocity) * 10.0f;
+            velocity = Vector3.Normalize(velocity) * 8.0f;
         }
 
         // // Pause testing
