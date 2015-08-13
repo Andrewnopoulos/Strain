@@ -14,7 +14,6 @@ public class Pistol : GunClass
 		fireRate = 0.6f;
 		shotCooldown = fireRate;
 		damage = 35.0f;
-		totalAmmo = 0;
 		maxClipAmmo = 8;
 		currentClipAmmo = maxClipAmmo;
 		reloadTime = 2.0f;
