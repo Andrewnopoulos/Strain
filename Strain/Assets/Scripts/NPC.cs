@@ -381,13 +381,15 @@ public class NPC : MonoBehaviour {
 		{
 			if (target.gameObject.tag == "Human")
 			{
+                NPC script = target.GetComponent<NPC>();
                 if (Random.Range(0, 100) < infectivity) // probability of infecting the person they're biting
                 {
-                    NPC script = target.GetComponent<NPC>();
                     script.BecomeZombie(virusStrain);
                     zombieSpawnerReference.currentZombie++;
                     zombieSpawnerReference.currentHuman--;
                 }
+
+                script.health -= damage;
 			}
 			else if (target.gameObject.tag == "Player")
 			{
