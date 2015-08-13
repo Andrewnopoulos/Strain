@@ -238,6 +238,8 @@ public class NPC : MonoBehaviour {
 
         virusStrain = new Chromosome(0.0f);
 
+        chromosomeLength = Chromosome.GetLength();
+
         UpdateStats();
 
 		if (!isZombie) {
@@ -285,7 +287,7 @@ public class NPC : MonoBehaviour {
                 incubationTime -= Time.deltaTime;
                 if (incubationTime <= 0)
                 {
-                    BecomeZombie(virusStrain);
+                    BecomeZombie();
                 }
             }
 		}
