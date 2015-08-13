@@ -60,21 +60,19 @@ public class GunClass : MonoBehaviour {
 			{
 				reload = false;
 				currentReloadTime = reloadTime;
-				if (maxClipAmmo < totalAmmo)
+				if (maxClipAmmo < totalAmmo + currentClipAmmo)
 				{
-					totalAmmo -= maxClipAmmo;
-					currentClipAmmo = maxClipAmmo;
+                        totalAmmo -= maxClipAmmo - currentClipAmmo;
+                        currentClipAmmo = maxClipAmmo;
 				}
 				else
 				{
-					currentClipAmmo = totalAmmo;
+					currentClipAmmo += totalAmmo;
 					totalAmmo = 0;
 				}
 			}
 		}
-
-		//if left mouse button is held down
-		if (Input.GetMouseButton (0)) 
+        else if (Input.GetMouseButton(0)) //if left mouse button is held down
 		{
 			if (currentClipAmmo > 0 && shotCooldown <= 0.0f && holsterCooldown <= 0.0f)
 			{
@@ -99,6 +97,10 @@ public class GunClass : MonoBehaviour {
                 }
 			}
 		}
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            reload = true;
+        }
 
 	}
 }

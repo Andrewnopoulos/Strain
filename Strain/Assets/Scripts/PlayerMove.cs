@@ -5,6 +5,12 @@ public class PlayerMove : MonoBehaviour {
 
     public CharacterController characterController;
 
+    private float currentDodgeRoll = 0.0f;
+    private float dogdeRollTime = 0.2f;
+    private Vector3 dodgeRollDir;
+
+    public float dodgeRollCost = 50.0f;
+
 	// Use this for initialization
 	void Start () {
 
@@ -16,28 +22,47 @@ public class PlayerMove : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		//Movement code
-		Vector3 velocity = new Vector3 (0, 0, 0);
+        //Movement code
+        currentDodgeRoll -= Time.deltaTime;
+        Vector3 velocity = new Vector3(0, 0, 0);
 
-        if (characterController.isGrounded)
+        if (currentDodgeRoll > 0)
         {
-            if (Input.GetKey(KeyCode.A))
+            velocity = dodgeRollDir;
+        }
+        else
+        {
+            if (characterController.isGrounded)
             {
-                velocity.x -= 1;
+                if (Input.GetKey(KeyCode.A))
+                {
+                    velocity.x -= 1;
+                }
+                if (Input.GetKey(KeyCode.S))
+                {
+                    velocity.z -= 1;
+                }
+                if (Input.GetKey(KeyCode.D))
+                {
+                    velocity.x += 1;
+                }
+                if (Input.GetKey(KeyCode.W))
+                {
+                    velocity.z += 1;
+                }
+                velocity = Vector3.Normalize(velocity) * 8.0f;
+
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    if (transform.GetComponentInParent<Player>().currentStamina > dodgeRollCost)
+                    {
+                        currentDodgeRoll = dogdeRollTime;
+                        dodgeRollDir = velocity * 3.0f;
+                        velocity = dodgeRollDir;
+                        transform.GetComponentInParent<Player>().currentStamina -= dodgeRollCost;
+                    }
+                }
             }
-            if (Input.GetKey(KeyCode.S))
-            {
-                velocity.z -= 1;
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                velocity.x += 1;
-            }
-            if (Input.GetKey(KeyCode.W))
-            {
-                velocity.z += 1;
-            }
-            velocity = Vector3.Normalize(velocity) * 8.0f;
         }
 
         // // Pause testing
