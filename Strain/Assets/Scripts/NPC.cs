@@ -326,7 +326,7 @@ public class NPC : MonoBehaviour {
 		targetPosition = new Vector3 (targetPosition.x, transform.position.y, targetPosition.z);
 	}
 
-	public void BecomeZombie(Chromosome inputVirus)
+	private void BecomeZombie(Chromosome inputVirus)
 	{
 		isZombie = true;
 		gameObject.tag = "Zombie";
