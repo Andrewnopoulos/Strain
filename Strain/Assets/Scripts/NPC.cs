@@ -9,7 +9,7 @@ public class NPC : MonoBehaviour {
     /// </summary>
     private class Chromosome
     {
-        private static int length = 6;
+        private static int length = 8;
         public static float mutationRate = 0.05f;
         public static float mutationStrength = 0.1f; // maximum mutation strength
         public static float randomInitValue = 0.4f;
@@ -73,9 +73,10 @@ public class NPC : MonoBehaviour {
         /// [1] - health<para />
         /// [2] - damage<para />
         /// [3] - infectivity<para />
-        /// [4] - sight<para />
-        /// [5] - sound<para />
-        /// [6] - smell
+        /// [4] - incubation<para />
+        /// [5] - sight<para />
+        /// [6] - sound<para />
+        /// [7] - smell
         /// </summary>
         /// <param name="index">Index of the gene to retrieve the value of</param>
         /// <returns>Value of the gene at the requested index.
@@ -196,6 +197,9 @@ public class NPC : MonoBehaviour {
     public float health;
     public float damage;
     public float infectivity;
+    public float incubationTime = 0;
+
+    public bool incubating;
 
     public float biteSpeed;
     private float biteCooldown = 0;
@@ -224,6 +228,8 @@ public class NPC : MonoBehaviour {
     public float varianceDamage = 30;
     public float minInfectivity = 40;
     public float varianceInfectivity = 60;
+    public float minIncubation = 1;
+    public float varianceIncubation = 149;
 
 	// Use this for initialization
 	void Start () {
@@ -231,6 +237,8 @@ public class NPC : MonoBehaviour {
 		zombieSpawnerReference = groundReference.GetComponent<ZombieSpawner>();
 
         virusStrain = new Chromosome(0.0f);
+
+        chromosomeLength = Chromosome.GetLength();
 
         UpdateStats();
 
@@ -273,6 +281,15 @@ public class NPC : MonoBehaviour {
 			{ 
 				Wander(); 
 			}
+
+            if (incubating)
+            {
+                incubationTime -= Time.deltaTime;
+                if (incubationTime <= 0)
+                {
+                    BecomeZombie();
+                }
+            }
 		}
 
 		if (isZombie)
@@ -320,20 +337,29 @@ public class NPC : MonoBehaviour {
 		Destroy (gameObject);
 	}
 
+    private void Infect(Chromosome inputVirus)
+    {
+        virusStrain = virusStrain.Crossover(inputVirus);
+
+        // sets the incubation time if it's not already incubating
+        if (!incubating)
+        {
+            incubationTime = minIncubation + virusStrain.Get(4) * varianceIncubation;
+        }
+    }
+
 	void Wander()
 	{
         targetPosition = Random.insideUnitSphere * 80;
 		targetPosition = new Vector3 (targetPosition.x, transform.position.y, targetPosition.z);
 	}
 
-	private void BecomeZombie(Chromosome inputVirus)
+	private void BecomeZombie()
 	{
 		isZombie = true;
 		gameObject.tag = "Zombie";
 		gameObject.layer = 10;
 		myMat.material = red;
-
-        virusStrain = virusStrain.Crossover(inputVirus);
 
         UpdateStats();
 
@@ -384,7 +410,7 @@ public class NPC : MonoBehaviour {
                 NPC script = target.GetComponent<NPC>();
                 if (Random.Range(0, 100) < infectivity) // probability of infecting the person they're biting
                 {
-                    script.BecomeZombie(virusStrain);
+                    script.Infect(virusStrain);
                     zombieSpawnerReference.currentZombie++;
                     zombieSpawnerReference.currentHuman--;
                 }
