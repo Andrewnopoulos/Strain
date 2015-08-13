@@ -216,14 +216,14 @@ public class NPC : MonoBehaviour {
     private Chromosome virusStrain;
     private int chromosomeLength;
 
-    public float minSpeed;
-    public float varianceSpeed;
-    public float minHealth;
-    public float varianceHealth;
-    public float minDamage;
-    public float varianceDamage;
-    public float minInfectivity;
-    public float varianceInfectivity;
+    public float minSpeed = 3;
+    public float varianceSpeed = 10;
+    public float minHealth = 100;
+    public float varianceHealth = 300;
+    public float minDamage = 10;
+    public float varianceDamage = 30;
+    public float minInfectivity = 40;
+    public float varianceInfectivity = 60;
 
 	// Use this for initialization
 	void Start () {
