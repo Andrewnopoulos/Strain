@@ -3,6 +3,8 @@ using System.Collections;
 
 public class GunClass : MonoBehaviour {
 
+    public AudioClip gunShot;
+
 	public GameObject bullet;
 
     //how many bullets shot at once (for shotgun)
@@ -94,6 +96,10 @@ public class GunClass : MonoBehaviour {
 
                     shotCooldown = fireRate;
                 }
+                gameObject.GetComponent<AudioSource>().clip = gunShot;
+
+                gameObject.GetComponent<AudioSource>().Play();
+
                 currentClipAmmo -= 1;
 			}
 		}
