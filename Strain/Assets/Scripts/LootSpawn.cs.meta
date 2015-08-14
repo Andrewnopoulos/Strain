@@ -1,10 +1,17 @@
 fileFormatVersion: 2
 guid: 8cd150fd2f0138b42b701e87aba6f574
-timeCreated: 1439426518
+timeCreated: 1439529570
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - PistolPickup: {fileID: 152062, guid: 6b1a875174913624ab177c3a61ece96a, type: 2}
+  - RiflePickup: {fileID: 184730, guid: 67d0e617bcc5b674db0e89b67096f831, type: 2}
+  - ShotgunPickup: {fileID: 195806, guid: f62a3c949e4080541b488e72b3b05a9f, type: 2}
+  - PistolAmmo: {fileID: 198406, guid: 9d26a91735752824692898099fc69906, type: 2}
+  - RifleAmmo: {fileID: 156814, guid: 4c81bf2a177f3654e8c547fadaea2b61, type: 2}
+  - ShotgunAmmo: {fileID: 156554, guid: 2a054cb7984ec6046874f71b29cd5964, type: 2}
+  - currentLoot: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
