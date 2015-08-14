@@ -12,7 +12,7 @@ public class NPC : MonoBehaviour {
         private static int length = 8;
         public static float mutationRate = 0.2f;
         public static float mutationStrength = 0.1f; // maximum mutation strength
-        public static float randomInitValue = 0.4f;
+        public static float randomInitValue = 0.3f;
 
         private float[] genes = new float[length];
         private float topGene = 0;
@@ -95,7 +95,7 @@ public class NPC : MonoBehaviour {
         /// Returns the length of the chromosomes
         /// </summary>
         /// <returns>Chromosome length</returns>
-        public static int GetLength()
+        public static int ChromosomeLength()
         {
             return length;
         }
@@ -217,8 +217,8 @@ public class NPC : MonoBehaviour {
 	public Material red;
 	public Material green;
 
-    private Chromosome virusStrain;
-    private int chromosomeLength;
+    private Chromosome virusStrain = new Chromosome(0);
+    public int chromosomeLength = 8;
 
     public float minSpeed = 3;
     public float varianceSpeed = 10;
@@ -233,12 +233,7 @@ public class NPC : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        chromosomeLength = Chromosome.GetLength();
 		zombieSpawnerReference = groundReference.GetComponent<ZombieSpawner>();
-
-        virusStrain = new Chromosome(0.0f);
-
-        chromosomeLength = Chromosome.GetLength();
 
         UpdateStats();
 
@@ -341,7 +336,7 @@ public class NPC : MonoBehaviour {
 
     public void InitializeZombie(float[] initialValues)
     {
-        if (initialValues.Length != chromosomeLength)
+        if (initialValues.Length != 8)
         {
             float[] randomValues = new float[chromosomeLength];
             for (int i = 0; i < chromosomeLength; i++)

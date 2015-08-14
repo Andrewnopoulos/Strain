@@ -8,7 +8,7 @@ public class GameMenuScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+        spawner.GetComponent<ZombieSpawner>().currentMode = GAMEMODE.PAUSED;
 	}
 	
 	// Update is called once per frame
