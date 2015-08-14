@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MeleeAttack : MonoBehaviour {
 
-    public float damage = 5;
+    public float damage = 10;
 
     //switchgun cooldown
     public float holsterRate = 0.1f;
@@ -31,7 +31,7 @@ public class MeleeAttack : MonoBehaviour {
         {
             if (attackCooldown <= 0.0f && holsterCooldown <= 0.0f)
             {
-                if (target != null)
+                if (target)
                 {
                     target.GetComponent<NPC>().health -= damage;
                 }
@@ -39,17 +39,17 @@ public class MeleeAttack : MonoBehaviour {
                 attackCooldown = attackRate;
             }
         }
-
-        target = null;
-
 	}
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 10 || other.gameObject.layer == 12)
-        {
+        if (other.tag == "Human" || other.tag == "Zombie")
             target = other.gameObject;
-        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        target = null;
     }
 
 }
