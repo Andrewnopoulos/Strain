@@ -270,13 +270,16 @@ public class NPC : MonoBehaviour {
 		} 
 		else 
 		{
-
             FindNearestZombie();
 
-            if ((transform.position - target.position).magnitude < 10)
+            if (target != null)
             {
-                Flee();
+                if ((transform.position - target.position).magnitude < 10)
+                {
+                    Flee();
+                }
             }
+
 			if((transform.position - targetPosition).magnitude < 2)
 			{ 
 				Wander(); 
@@ -306,6 +309,11 @@ public class NPC : MonoBehaviour {
 			KillYourself();
 		}
 	}
+
+    public Chromosome GetVirus()
+    {
+        return virusStrain;
+    }
 
     /// <summary>
     /// Updates NPC stats (speed, health, damage, infectivity) based on chromosome values
@@ -340,13 +348,14 @@ public class NPC : MonoBehaviour {
             {
                 randomValues[i] = Random.Range(0, 0.2f);
             }
+            virusStrain = new Chromosome(randomValues);
         }
         else
         {
             virusStrain = new Chromosome(initialValues);
         }
 
-        BecomeZombie();
+        //BecomeZombie();
     }
 
 	public void KillYourself()
