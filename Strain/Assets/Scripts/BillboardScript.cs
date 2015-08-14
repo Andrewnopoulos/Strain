@@ -37,7 +37,7 @@ public class BillboardScript : MonoBehaviour {
 
             //speed
             transform.GetChild(0).transform.localScale = new Vector3(transform.GetChild(0).transform.localScale.x, 
-                0.9f * (npc.speed / (npc.varianceSpeed + npc.minSpeed)), 
+                0.9f * (npc.GetVirus().Get(0)), 
                 transform.GetChild(0).transform.localScale.z);
 
             transform.GetChild(0).transform.localPosition = new Vector3(transform.GetChild(0).transform.localPosition.x,
@@ -46,7 +46,7 @@ public class BillboardScript : MonoBehaviour {
 
             //health
             transform.GetChild(1).transform.localScale = new Vector3(transform.GetChild(1).transform.localScale.x,
-                0.9f * (npc.health / (npc.varianceHealth + npc.minHealth)),
+                0.9f * (npc.GetVirus().Get(1)),
                 transform.GetChild(1).transform.localScale.z);
 
             transform.GetChild(1).transform.localPosition = new Vector3(transform.GetChild(1).transform.localPosition.x,
@@ -55,7 +55,7 @@ public class BillboardScript : MonoBehaviour {
 
             //damage
             transform.GetChild(2).transform.localScale = new Vector3(transform.GetChild(2).transform.localScale.x,
-                0.9f * (npc.damage / (npc.varianceDamage + npc.minDamage)),
+                0.9f * (npc.GetVirus().Get(2)),
                 transform.GetChild(2).transform.localScale.z);
 
             transform.GetChild(2).transform.localPosition = new Vector3(transform.GetChild(2).transform.localPosition.x,
@@ -64,7 +64,7 @@ public class BillboardScript : MonoBehaviour {
 
             //sight
             transform.GetChild(3).transform.localScale = new Vector3(transform.GetChild(3).transform.localScale.x,
-                0.9f * (0),
+                0.9f * (npc.GetVirus().Get(5)),
                 transform.GetChild(3).transform.localScale.z);
 
             transform.GetChild(3).transform.localPosition = new Vector3(transform.GetChild(3).transform.localPosition.x,
@@ -73,7 +73,7 @@ public class BillboardScript : MonoBehaviour {
 
             //sound
             transform.GetChild(4).transform.localScale = new Vector3(transform.GetChild(4).transform.localScale.x,
-                0.9f * (0),
+                0.9f * (npc.GetVirus().Get(6)),
                 transform.GetChild(4).transform.localScale.z);
 
             transform.GetChild(4).transform.localPosition = new Vector3(transform.GetChild(4).transform.localPosition.x,
@@ -82,7 +82,7 @@ public class BillboardScript : MonoBehaviour {
 
             //smell
             transform.GetChild(5).transform.localScale = new Vector3(transform.GetChild(5).transform.localScale.x,
-                           0.9f * (0),
+                           0.9f * (npc.GetVirus().Get(7)),
                            transform.GetChild(5).transform.localScale.z);
 
             transform.GetChild(5).transform.localPosition = new Vector3(transform.GetChild(5).transform.localPosition.x,
