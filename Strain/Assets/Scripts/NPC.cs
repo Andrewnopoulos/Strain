@@ -351,11 +351,7 @@ public class NPC : MonoBehaviour {
 
 	public void KillYourself()
 	{
-		if (!isZombie)
-			zombieSpawnerReference.currentHuman--;
-		else
-			zombieSpawnerReference.currentZombie--;
-
+        zombieSpawnerReference.RemoveNPC(gameObject);
 		Destroy (gameObject);
 	}
 
@@ -383,9 +379,6 @@ public class NPC : MonoBehaviour {
 		gameObject.tag = "Zombie";
 		gameObject.layer = 10;
 		myMat.material = red;
-
-        zombieSpawnerReference.currentZombie++;
-        zombieSpawnerReference.currentHuman--;
 
         UpdateStats();
 
