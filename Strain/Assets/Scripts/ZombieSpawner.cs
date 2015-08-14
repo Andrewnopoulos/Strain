@@ -138,9 +138,9 @@ public class ZombieSpawner : MonoBehaviour {
             {
                 NPC script = obj.GetComponent<NPC>();
 
-                float[] initialZombieValues = new float[NPC.Chromosome.GetLength()];
+                float[] initialZombieValues = new float[NPC.Chromosome.ChromosomeLength()];
 
-                for (int i = 0; i < NPC.Chromosome.GetLength(); i++)
+                for (int i = 0; i < NPC.Chromosome.ChromosomeLength(); i++)
                 {
                     initialZombieValues[i] = Random.Range(0.0f, 0.3f);
                 }
@@ -148,8 +148,6 @@ public class ZombieSpawner : MonoBehaviour {
                 script.InitializeZombie(initialZombieValues);
             }
         }
-
-        
     }
 
     public void SimulationStart()
@@ -207,20 +205,6 @@ public class ZombieSpawner : MonoBehaviour {
 
             SpawnHuman(RandomPos(80));
         }
-
-        //if (zombieSpawnCooldown <= 0 && currentZombie < maxZombie)
-        //{
-        //    zombieSpawnCooldown = zombieSpawnRate;
-
-        //    SpawnZombie(RandomPos(80));
-        //}
-
-        //if (humanSpawnCooldown <= 0 && currentHuman < maxHuman)
-        //{
-        //    humanSpawnCooldown = humanSpawnRate;
-
-        //    SpawnHuman(RandomPos(80));
-        //}
     }
 
     void PausedUpdate()
