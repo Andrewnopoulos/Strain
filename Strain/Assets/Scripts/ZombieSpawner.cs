@@ -14,18 +14,19 @@ public class ZombieSpawner : MonoBehaviour {
 	public GameObject npcprefab;
 	public GameObject player;
 
-	public float maxNPC = 20;
-	public float maxZombie = 1;
-	public float maxHuman = 20;
+    public int activeHumanCount;
+    public int infectedHumanCount;
+    public int zombieCount;
 
-	public float currentHuman = 0;
-	public float currentZombie = 0;
+    private float humanSpawnRate = 5; // spawns a human every 5 seconds
 
-	public float zombieSpawnRate = 1;
+	public float initialZombieCount = 3;
 	private float zombieSpawnCooldown = 0;
 
-	public float humanSpawnRate = 100;
+	public float initialHumanCount = 100;
 	private float humanSpawnCooldown = 0;
+
+    public float simSpeed = 1.0f;
 
 	public List<GameObject> npcList;
 
@@ -39,7 +40,7 @@ public class ZombieSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        switch(currentMode)
+        switch (currentMode)
         {
             case GAMEMODE.SHOOTAEN:
                 ShootingUpdate();
@@ -75,6 +76,38 @@ public class ZombieSpawner : MonoBehaviour {
         return position;
 	}
 
+    public void RemoveNPC(GameObject obj)
+    {
+        npcList.Remove(obj);
+    }
+
+    void CountNPCs()
+    {
+        activeHumanCount = 0;
+        infectedHumanCount = 0;
+        zombieCount = 0;
+        foreach(GameObject npc in npcList)
+        {
+            NPC script = npc.GetComponent<NPC>();
+            if (script == null)
+            {
+                continue;
+            }
+            if (script.isZombie)
+            {
+                zombieCount++;
+            }
+            else if (script.incubating)
+            {
+                infectedHumanCount++;
+            }
+            else
+            {
+                activeHumanCount++;
+            }
+        }
+    }
+
 	void SpawnHuman(Vector3 position)
 	{
 		GameObject newHuman = (GameObject)Instantiate(npcprefab, position, transform.rotation);
@@ -84,8 +117,6 @@ public class ZombieSpawner : MonoBehaviour {
 		script.isZombie = false;
 		script.groundReference = gameObject;
 		npcList.Add(newHuman);
-
-		currentHuman++;
 	}
 
 	void SpawnZombie(Vector3 position)
@@ -96,9 +127,17 @@ public class ZombieSpawner : MonoBehaviour {
 		NPC script = newZombie.GetComponent<NPC>();
 		script.isZombie = true;
 		script.groundReference = gameObject;
-		npcList.Add(newZombie);
 
-		currentZombie++;
+        //float[] initialZombieValues = new float[NPC.Chromosome.GetLength()];
+
+        //for (int i = 0; i < NPC.Chromosome.GetLength(); i++)
+        //{
+        //    initialZombieValues[i] = Random.Range(0.0f, 0.3f);
+        //}
+
+        //script.InitializeZombie(initialZombieValues);
+
+		npcList.Add(newZombie);
 	}
 
     public void SimulationStart()
@@ -107,20 +146,34 @@ public class ZombieSpawner : MonoBehaviour {
         Time.timeScale = 1;
     }
 
+    void SimulationUpdate()
+    {
+        Time.timeScale = simSpeed;
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            simSpeed += 0.2f;
+        }
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            simSpeed -= 0.2f;
+        }
+
+    }
+
     public void ShootingStart()
     {
         currentMode = GAMEMODE.SHOOTAEN;
         Time.timeScale = 1;
 
-        zombieSpawnCooldown = zombieSpawnRate;
         humanSpawnCooldown = humanSpawnRate;
 
-        while (currentZombie < maxZombie)
+        for (int i = 0; i < initialZombieCount; i++ )
         {
             SpawnZombie(RandomPos(80));
         }
 
-        while (currentHuman < maxHuman)
+        for (int i = 0; i < initialHumanCount; i++)
         {
             SpawnHuman(RandomPos(80));
         }
@@ -128,29 +181,32 @@ public class ZombieSpawner : MonoBehaviour {
         npcList.Add(player);
     }
 
-    void SimulationUpdate()
-    {
-
-    }
-
     void ShootingUpdate()
     {
-        zombieSpawnCooldown -= Time.deltaTime;
         humanSpawnCooldown -= Time.deltaTime;
 
-        if (zombieSpawnCooldown <= 0 && currentZombie < maxZombie)
-        {
-            zombieSpawnCooldown = zombieSpawnRate;
-
-            SpawnZombie(RandomPos(80));
-        }
-
-        if (humanSpawnCooldown <= 0 && currentHuman < maxHuman)
+        if (humanSpawnCooldown <= 0)
         {
             humanSpawnCooldown = humanSpawnRate;
 
+            CountNPCs();
+
             SpawnHuman(RandomPos(80));
         }
+
+        //if (zombieSpawnCooldown <= 0 && currentZombie < maxZombie)
+        //{
+        //    zombieSpawnCooldown = zombieSpawnRate;
+
+        //    SpawnZombie(RandomPos(80));
+        //}
+
+        //if (humanSpawnCooldown <= 0 && currentHuman < maxHuman)
+        //{
+        //    humanSpawnCooldown = humanSpawnRate;
+
+        //    SpawnHuman(RandomPos(80));
+        //}
     }
 
     void PausedUpdate()
