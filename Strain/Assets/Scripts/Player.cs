@@ -41,17 +41,21 @@ public class Player : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            SwitchToPistol();
+            SwitchToMelee();
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            SwitchToRifle();
+            SwitchToPistol();
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            SwitchToShotgun();
+            SwitchToRifle();
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            SwitchToShotgun();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             SwitchToFlamethrower();
         }
@@ -174,6 +178,24 @@ public class Player : MonoBehaviour {
         }
     }
 
+    void SwitchToMelee()
+    {
+        if (gameObject.GetComponentInChildren<MeleeAttack>().enabled)
+            return;
+
+        //enable pistol
+        gameObject.GetComponentInChildren<MeleeAttack>().enabled = true;
+
+        //disable other guns
+        gun.GetComponent<Pistol>().enabled = false;
+        gun.GetComponent<AssaultRifle>().enabled = false;
+        gun.GetComponent<Shotgun>().enabled = false;
+
+        gun.GetComponent<MeshRenderer>().enabled = false;
+
+        gameObject.GetComponentInChildren<MeleeAttack>().holsterCooldown = gameObject.GetComponentInChildren<MeleeAttack>().holsterRate;
+    }
+
     void SwitchToPistol()
     {
         if (!hasPistol || gun.GetComponent<Pistol>().enabled)
@@ -183,6 +205,7 @@ public class Player : MonoBehaviour {
         gun.GetComponent<Pistol>().enabled = true;
 
         //disable other guns
+        gameObject.GetComponentInChildren<MeleeAttack>().enabled = false;
         gun.GetComponent<AssaultRifle>().enabled = false;
         gun.GetComponent<Shotgun>().enabled = false;
 
@@ -197,6 +220,7 @@ public class Player : MonoBehaviour {
 
         gun.GetComponent<AssaultRifle>().enabled = true;
 
+        gameObject.GetComponentInChildren<MeleeAttack>().enabled = false;
         gun.GetComponent<Pistol>().enabled = false;
         gun.GetComponent<Shotgun>().enabled = false;
 
@@ -212,6 +236,7 @@ public class Player : MonoBehaviour {
 
         gun.GetComponent<Shotgun>().enabled = true;
 
+        gameObject.GetComponentInChildren<MeleeAttack>().enabled = false;
         gun.GetComponent<Pistol>().enabled = false;
         gun.GetComponent<AssaultRifle>().enabled = false;
 
