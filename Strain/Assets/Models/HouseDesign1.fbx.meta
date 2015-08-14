@@ -83,6 +83,8 @@ ModelImporter:
     100150: GarageDoor3
     100152: transform1
     100154: transform2
+    100156: House1 1
+    100158: Garage1
     400000: Corner_WIndow_Low1
     400002: Corner_WIndow_Low10
     400004: Corner_WIndow_Low11
@@ -161,6 +163,8 @@ ModelImporter:
     400150: GarageDoor3
     400152: transform1
     400154: transform2
+    400156: House1 1
+    400158: Garage1
     2300000: Corner_WIndow_Low1
     2300002: Corner_WIndow_Low10
     2300004: Corner_WIndow_Low11
@@ -235,6 +239,8 @@ ModelImporter:
     2300142: Window8
     2300144: Window9
     2300146: GarageDoor3
+    2300148: House1 1
+    2300150: Garage1
     3300000: Corner_WIndow_Low1
     3300002: Corner_WIndow_Low10
     3300004: Corner_WIndow_Low11
@@ -309,6 +315,8 @@ ModelImporter:
     3300142: Window8
     3300144: Window9
     3300146: GarageDoor3
+    3300148: House1 1
+    3300150: Garage1
     4300000: Wall_Low1
     4300002: Door1
     4300004: Wall_DoorFrame1
@@ -383,6 +391,8 @@ ModelImporter:
     4300142: RoofFull4
     4300144: RoofFull5
     4300146: GarageDoor3
+    4300148: House1
+    4300150: Garage1
     7400000: Take 001
     9500000: //RootNode
   materials:
