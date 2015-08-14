@@ -29,7 +29,9 @@ public class LootSpawn : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+
+        currentLoot = null;
+
 	}
 	
 	// Update is called once per frame
@@ -47,8 +49,9 @@ public class LootSpawn : MonoBehaviour {
 
     void SpawnLoot()
     {
-        if (currentLoot.gameObject != null)
-            return;
+
+        if (currentLoot)
+            Destroy(currentLoot);
 
         if (Random.Range(0, 100) < lootSpawnChance)
         {
@@ -80,7 +83,7 @@ public class LootSpawn : MonoBehaviour {
                 //spawn rifle ammo
                 currentLoot = Instantiate(RifleAmmo, transform.position, transform.rotation) as GameObject;
             }
-            else 
+            else
             {
                 //spawn shotgun ammo
                 currentLoot = Instantiate(ShotgunAmmo, transform.position, transform.rotation) as GameObject;

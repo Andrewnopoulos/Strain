@@ -41,7 +41,7 @@ public class Player : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            SwitchToMelee();
+            //SwitchToMelee();
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -205,7 +205,7 @@ public class Player : MonoBehaviour {
         gun.GetComponent<Pistol>().enabled = true;
 
         //disable other guns
-        gameObject.GetComponentInChildren<MeleeAttack>().enabled = false;
+        //gameObject.GetComponentInChildren<MeleeAttack>().enabled = false;
         gun.GetComponent<AssaultRifle>().enabled = false;
         gun.GetComponent<Shotgun>().enabled = false;
 
@@ -220,7 +220,7 @@ public class Player : MonoBehaviour {
 
         gun.GetComponent<AssaultRifle>().enabled = true;
 
-        gameObject.GetComponentInChildren<MeleeAttack>().enabled = false;
+        //gameObject.GetComponentInChildren<MeleeAttack>().enabled = false;
         gun.GetComponent<Pistol>().enabled = false;
         gun.GetComponent<Shotgun>().enabled = false;
 
@@ -236,7 +236,7 @@ public class Player : MonoBehaviour {
 
         gun.GetComponent<Shotgun>().enabled = true;
 
-        gameObject.GetComponentInChildren<MeleeAttack>().enabled = false;
+        //gameObject.GetComponentInChildren<MeleeAttack>().enabled = false;
         gun.GetComponent<Pistol>().enabled = false;
         gun.GetComponent<AssaultRifle>().enabled = false;
 
