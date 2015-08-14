@@ -20,10 +20,10 @@ public class ZombieSpawner : MonoBehaviour {
 
     private float humanSpawnRate = 5; // spawns a human every 5 seconds
 
-	public float initialZombieCount = 3;
+	public int initialZombieCount = 3;
 	private float zombieSpawnCooldown = 0;
 
-	public float initialHumanCount = 100;
+	public int initialHumanCount = 100;
 	private float humanSpawnCooldown = 0;
 
     public float simSpeed = 1.0f;
@@ -127,18 +127,28 @@ public class ZombieSpawner : MonoBehaviour {
 		NPC script = newZombie.GetComponent<NPC>();
 		script.isZombie = true;
 		script.groundReference = gameObject;
-
-        //float[] initialZombieValues = new float[NPC.Chromosome.GetLength()];
-
-        //for (int i = 0; i < NPC.Chromosome.GetLength(); i++)
-        //{
-        //    initialZombieValues[i] = Random.Range(0.0f, 0.3f);
-        //}
-
-        //script.InitializeZombie(initialZombieValues);
-
 		npcList.Add(newZombie);
 	}
+
+    void InitZombies()
+    {
+        foreach(GameObject obj in npcList)
+        {
+            if (obj.tag == "Zombie")
+            {
+                NPC script = obj.GetComponent<NPC>();
+
+                float[] initialZombieValues = new float[NPC.Chromosome.ChromosomeLength()];
+
+                for (int i = 0; i < NPC.Chromosome.ChromosomeLength(); i++)
+                {
+                    initialZombieValues[i] = Random.Range(0.0f, 0.3f);
+                }
+
+                script.InitializeZombie(initialZombieValues);
+            }
+        }
+    }
 
     public void SimulationStart()
     {
@@ -168,15 +178,17 @@ public class ZombieSpawner : MonoBehaviour {
 
         humanSpawnCooldown = humanSpawnRate;
 
-        for (int i = 0; i < initialZombieCount; i++ )
-        {
-            SpawnZombie(RandomPos(80));
-        }
-
         for (int i = 0; i < initialHumanCount; i++)
         {
             SpawnHuman(RandomPos(80));
         }
+
+        for (int i = 0; i < initialZombieCount; i++)
+        {
+            SpawnZombie(RandomPos(80));
+        }
+
+        InitZombies();
 
         npcList.Add(player);
     }
@@ -193,20 +205,6 @@ public class ZombieSpawner : MonoBehaviour {
 
             SpawnHuman(RandomPos(80));
         }
-
-        //if (zombieSpawnCooldown <= 0 && currentZombie < maxZombie)
-        //{
-        //    zombieSpawnCooldown = zombieSpawnRate;
-
-        //    SpawnZombie(RandomPos(80));
-        //}
-
-        //if (humanSpawnCooldown <= 0 && currentHuman < maxHuman)
-        //{
-        //    humanSpawnCooldown = humanSpawnRate;
-
-        //    SpawnHuman(RandomPos(80));
-        //}
     }
 
     void PausedUpdate()
