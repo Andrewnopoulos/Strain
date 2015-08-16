@@ -108,6 +108,7 @@ ModelImporter:
     4300000: STR_LOWsmooth:Group1
     7400000: Take 001
     9500000: //RootNode
+    11100000: //RootNode
     13700000: STR_LOWsmooth:Group1
   materials:
     importMaterials: 1
@@ -128,7 +129,133 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 5
+      lastFrame: 65
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 1
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: MainPivot
+        weight: 1
+      - path: MainPivot/L_Leg
+        weight: 1
+      - path: MainPivot/L_Leg/L_Knee
+        weight: 1
+      - path: MainPivot/L_Leg/L_Knee/L_Foot
+        weight: 1
+      - path: MainPivot/L_Leg/L_Knee/L_Foot/L_Toe
+        weight: 1
+      - path: MainPivot/MidPivot
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/Head
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/L_Arm
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/L_Arm/L_Elbow
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/L_Arm/L_Elbow/L_Hand
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/L_Arm/L_Elbow/L_Hand/L_LeftFinger1
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/L_Arm/L_Elbow/L_Hand/L_LeftFinger1/L_LeftFinger2
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/L_Arm/L_Elbow/L_Hand/L_LeftFinger1/L_LeftFinger2/L_LeftFinger3
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/L_Arm/L_Elbow/L_Hand/L_LeftFinger1/L_LeftFinger2/L_LeftFinger3/L_LeftFinger4
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/L_Arm/L_Elbow/L_Hand/L_MidFinger1
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/L_Arm/L_Elbow/L_Hand/L_MidFinger1/L_MidFinger2
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/L_Arm/L_Elbow/L_Hand/L_MidFinger1/L_MidFinger2/L_MidFinger3
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/L_Arm/L_Elbow/L_Hand/L_MidFinger1/L_MidFinger2/L_MidFinger3/L_MidFinger4
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/L_Arm/L_Elbow/L_Hand/L_RightFinger1
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/L_Arm/L_Elbow/L_Hand/L_RightFinger1/L_RightFinger2
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/L_Arm/L_Elbow/L_Hand/L_RightFinger1/L_RightFinger2/L_RightFinger3
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/L_Arm/L_Elbow/L_Hand/L_RightFinger1/L_RightFinger2/L_RightFinger3/L_RightFinger4
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/L_Arm/L_Elbow/L_Hand/L_Thumb1
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/L_Arm/L_Elbow/L_Hand/L_Thumb1/L_Thumb2
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/L_Arm/L_Elbow/L_Hand/L_Thumb1/L_Thumb2/L_Thumb3
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/R_Arm
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/R_Arm/R_Elbow
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/R_Arm/R_Elbow/R_Hand
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/R_Arm/R_Elbow/R_Hand/R_LeftFinger1
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/R_Arm/R_Elbow/R_Hand/R_LeftFinger1/R_LeftFinger2
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/R_Arm/R_Elbow/R_Hand/R_LeftFinger1/R_LeftFinger2/R_LeftFinger3
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/R_Arm/R_Elbow/R_Hand/R_LeftFinger1/R_LeftFinger2/R_LeftFinger3/R_LeftFinger4
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/R_Arm/R_Elbow/R_Hand/R_MidFinger1
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/R_Arm/R_Elbow/R_Hand/R_MidFinger1/R_MidFinger2
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/R_Arm/R_Elbow/R_Hand/R_MidFinger1/R_MidFinger2/R_MidFinger3
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/R_Arm/R_Elbow/R_Hand/R_MidFinger1/R_MidFinger2/R_MidFinger3/R_MidFinger4
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/R_Arm/R_Elbow/R_Hand/R_RightFinger1
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/R_Arm/R_Elbow/R_Hand/R_RightFinger1/R_RightFinger2
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/R_Arm/R_Elbow/R_Hand/R_RightFinger1/R_RightFinger2/R_RightFinger3
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/R_Arm/R_Elbow/R_Hand/R_RightFinger1/R_RightFinger2/R_RightFinger3/R_RightFinger4
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/R_Arm/R_Elbow/R_Hand/R_Thumb1
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/R_Arm/R_Elbow/R_Hand/R_Thumb1/R_Thumb2
+        weight: 1
+      - path: MainPivot/MidPivot/BodyPivot/R_Arm/R_Elbow/R_Hand/R_Thumb1/R_Thumb2/R_Thumb3
+        weight: 1
+      - path: MainPivot/R_Leg
+        weight: 1
+      - path: MainPivot/R_Leg/R_Knee
+        weight: 1
+      - path: MainPivot/R_Leg/R_Knee/R_Foot
+        weight: 1
+      - path: MainPivot/R_Leg/R_Knee/R_Foot/R_Toe
+        weight: 1
+      - path: STR_LOWsmooth:Group1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -166,7 +293,7 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
