@@ -251,6 +251,12 @@ public class Player : MonoBehaviour {
             return;
     }
 
+	public void TakeDamage(float damage)
+	{
+		gameObject.GetComponentInChildren<CameraMove>().screenShake = true;
+		health -= damage;
+	}
+
     void Die()
     {
 

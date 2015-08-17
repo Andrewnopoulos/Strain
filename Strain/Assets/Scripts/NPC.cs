@@ -466,7 +466,7 @@ public class NPC : MonoBehaviour {
 			else if (target.gameObject.tag == "Player")
 			{
                 Player script = target.GetComponent<Player>();
-                script.health -= damage;
+                script.TakeDamage(damage);
 			}
 		}
 
