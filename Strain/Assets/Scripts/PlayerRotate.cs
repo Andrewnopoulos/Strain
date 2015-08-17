@@ -3,8 +3,6 @@ using System.Collections;
 
 public class PlayerRotate : MonoBehaviour {
 
-	// Use this for initialization
-	//LayerMask layer;
     public Vector3 mouseInWorld;
 
 	int layermask = 1;
@@ -12,8 +10,7 @@ public class PlayerRotate : MonoBehaviour {
 	void Start () {
 		layermask = 1 << 8;
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 		
 		//Rotation code
