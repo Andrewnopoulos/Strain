@@ -5,6 +5,8 @@ public class PlayerMove : MonoBehaviour {
 
     public CharacterController characterController;
 
+	public Camera mainCamera;
+
     private float currentDodgeRoll = 0.0f;
     private float dogdeRollTime = 0.2f;
     private Vector3 dodgeRollDir;
@@ -60,6 +62,8 @@ public class PlayerMove : MonoBehaviour {
                         dodgeRollDir = velocity * 3.0f;
                         velocity = dodgeRollDir;
                         transform.GetComponentInParent<Player>().currentStamina -= dodgeRollCost;
+
+						mainCamera.GetComponent<CameraMove>().screenShake = true;
                     }
                 }
             }

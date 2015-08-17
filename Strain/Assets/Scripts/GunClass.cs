@@ -7,6 +7,8 @@ public class GunClass : MonoBehaviour {
 
 	public GameObject bullet;
 
+	public Camera mainCamera;
+
     //how many bullets shot at once (for shotgun)
     public float shotCount;
 
@@ -98,9 +100,12 @@ public class GunClass : MonoBehaviour {
                 }
                 gameObject.GetComponent<AudioSource>().clip = gunShot;
 
+				gameObject.GetComponent<AudioSource>().pitch = Random.Range(0.95f, 1.05f);
                 gameObject.GetComponent<AudioSource>().Play();
 
                 currentClipAmmo -= 1;
+
+				mainCamera.GetComponent<CameraMove>().screenShake = true;
 			}
 		}
         else if (Input.GetKeyDown(KeyCode.R))
