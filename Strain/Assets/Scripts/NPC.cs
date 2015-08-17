@@ -239,12 +239,6 @@ public class NPC : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		gameObject.GetComponent<Rigidbody>().isKinematic = true;
-		gameObject.GetComponent<Rigidbody>().detectCollisions = false;
-
-		//gameObject.GetComponent<Rigidbody>().Sleep();
-
-
 		zombieSpawnerReference = groundReference.GetComponent<ZombieSpawner>();
 
         UpdateStats();
@@ -341,18 +335,18 @@ public class NPC : MonoBehaviour {
 				gameObject.GetComponent<Rigidbody>().isKinematic = true;
 				gameObject.GetComponent<Rigidbody>().detectCollisions = false;
 
-				//gameObject.GetComponent<Rigidbody>().Sleep();
-
 				transform.position -= new Vector3(0, 3 * Time.deltaTime, 0);
 			}
 			else
 			{
-				gameObject.GetComponent<Rigidbody>().isKinematic = false;
-				gameObject.GetComponent<Rigidbody>().detectCollisions = true;
+				if (!gameObject.GetComponent<Rigidbody>())
+				{
+					gameObject.layer = 13;
 
-				//gameObject.GetComponent<Rigidbody>().WakeUp();
+					gameObject.AddComponent<Rigidbody>();
 
-				navComponent.enabled = false;
+					navComponent.enabled = false;
+				}
 			}
 		}
 	}
