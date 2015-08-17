@@ -346,6 +346,8 @@ public class NPC : MonoBehaviour {
 					gameObject.AddComponent<Rigidbody>();
 
 					navComponent.enabled = false;
+
+					gameObject.GetComponent<Rigidbody>().AddForce(pushDirection * 50);
 				}
 			}
 		}
