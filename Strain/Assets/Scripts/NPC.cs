@@ -190,6 +190,9 @@ public class NPC : MonoBehaviour {
         }
     }
 
+	private float gettingPushed;
+	private Vector3 pushDirection;
+
 	public Transform target;
 	public Vector3 targetPosition;
 
@@ -247,6 +250,16 @@ public class NPC : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		gettingPushed -= Time.deltaTime;
+		if (gettingPushed > 0)
+		{
+			transform.position += pushDirection * (7.0f * gettingPushed);
+		}
+		else
+		{
+			pushDirection = new Vector3(0, 0, 0);
+		}
 
 		if (isZombie) 
 		{
@@ -464,5 +477,11 @@ public class NPC : MonoBehaviour {
 	{
         Vector3 fleeDir = transform.position - target.position;
         targetPosition = transform.position + (Vector3.Normalize(fleeDir) * 10);
+	}
+
+	public void GetPushed(Vector3 dir)
+	{
+		gettingPushed = 0.1f;
+		pushDirection += dir;
 	}
 }

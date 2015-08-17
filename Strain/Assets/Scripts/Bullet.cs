@@ -41,6 +41,7 @@ public class Bullet : MonoBehaviour {
 			{
 				NPC script = collidedObject.GetComponent<NPC>();
 				script.health -= damage;
+				script.GetPushed(transform.forward);
 			}
 		}
 
