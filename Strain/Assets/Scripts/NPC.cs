@@ -234,8 +234,17 @@ public class NPC : MonoBehaviour {
     public float maxIncubation = 150;
     public float varianceIncubation = 149;
 
+	private bool ragdoll = false;
+	private float sinkDelay = 3.0f;
+
 	// Use this for initialization
 	void Start () {
+		gameObject.GetComponent<Rigidbody>().isKinematic = true;
+		gameObject.GetComponent<Rigidbody>().detectCollisions = false;
+
+		//gameObject.GetComponent<Rigidbody>().Sleep();
+
+
 		zombieSpawnerReference = groundReference.GetComponent<ZombieSpawner>();
 
         UpdateStats();
@@ -251,70 +260,100 @@ public class NPC : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		gettingPushed -= Time.deltaTime;
-		if (gettingPushed > 0)
+		if (!ragdoll)
 		{
-			transform.position += pushDirection * (7.0f * gettingPushed);
-		}
-		else
-		{
-			pushDirection = new Vector3(0, 0, 0);
-		}
-
-		if (isZombie) 
-		{
-            biteCooldown -= Time.deltaTime;
-
-            FindNearestHuman();
-
-			if (target) 
+			gettingPushed -= Time.deltaTime;
+			if (gettingPushed > 0)
 			{
-				navComponent.SetDestination(target.position);
+				transform.position += pushDirection * (7.0f * gettingPushed);
 			}
+			else
+			{
+			pushDirection = new Vector3(0, 0, 0);
+			}
+
+			if (isZombie) 
+			{
+            	biteCooldown -= Time.deltaTime;
+
+           		FindNearestHuman();
+
+				if (target) 
+				{
+					navComponent.SetDestination(target.position);
+				}
 			
-			if ((target.position - transform.position).magnitude < 2 && biteCooldown <= 0) {
-				BiteHuman();
+				if ((target.position - transform.position).magnitude < 2 && biteCooldown <= 0) {
+					BiteHuman();
+				}
+			} 
+			else 
+			{
+            	FindNearestZombie();
+
+            	if (target != null)
+            	{
+                	if ((transform.position - target.position).magnitude < 10)
+                	{
+                    	Flee();
+                	}
+            	}
+
+				if((transform.position - targetPosition).magnitude < 2)
+				{ 
+					Wander(); 
+				}
+
+            	if (incubating)
+            	{
+                	incubationTime -= Time.deltaTime;
+                	if (incubationTime <= 0)
+                	{
+                    	BecomeZombie();
+                	}
+            	}
 			}
-		} 
-		else 
-		{
-            FindNearestZombie();
 
-            if (target != null)
-            {
-                if ((transform.position - target.position).magnitude < 10)
-                {
-                    Flee();
-                }
-            }
+			if (isZombie)
+				navComponent.SetDestination (target.position);
+			else
+				navComponent.SetDestination (targetPosition);
 
-			if((transform.position - targetPosition).magnitude < 2)
-			{ 
-				Wander(); 
+        	if (health <= 0)
+        	{
+            	alive = false;
+       		}
+
+			if (!alive) {
+				KillYourself();
 			}
-
-            if (incubating)
-            {
-                incubationTime -= Time.deltaTime;
-                if (incubationTime <= 0)
-                {
-                    BecomeZombie();
-                }
-            }
 		}
-
-		if (isZombie)
-			navComponent.SetDestination (target.position);
 		else
-			navComponent.SetDestination (targetPosition);
+		{
+			sinkDelay -= Time.deltaTime;
 
-        if (health <= 0)
-        {
-            alive = false;
-        }
+			if (sinkDelay < -2.0f)
+			{
+				Destroy(gameObject);
+			}
+			else if (sinkDelay < 0.0f)
+			{
+				gameObject.GetComponent<Rigidbody>().isKinematic = true;
+				gameObject.GetComponent<Rigidbody>().detectCollisions = false;
 
-		if (!alive) {
-			KillYourself();
+				//gameObject.GetComponent<Rigidbody>().Sleep();
+
+				transform.position -= new Vector3(0, 3 * Time.deltaTime, 0);
+			}
+			else
+			{
+				gameObject.GetComponent<Rigidbody>().isKinematic = false;
+				gameObject.GetComponent<Rigidbody>().detectCollisions = true;
+
+				//gameObject.GetComponent<Rigidbody>().WakeUp();
+
+				navComponent.enabled = false;
+			}
 		}
 	}
 
@@ -369,7 +408,7 @@ public class NPC : MonoBehaviour {
 	public void KillYourself()
 	{
         zombieSpawnerReference.RemoveNPC(gameObject);
-		Destroy (gameObject);
+		Ragdoll();
 	}
 
     private void Infect(Chromosome inputVirus)
@@ -477,6 +516,11 @@ public class NPC : MonoBehaviour {
 	{
         Vector3 fleeDir = transform.position - target.position;
         targetPosition = transform.position + (Vector3.Normalize(fleeDir) * 10);
+	}
+
+	void Ragdoll()
+	{
+		ragdoll = true;
 	}
 
 	public void GetPushed(Vector3 dir)
