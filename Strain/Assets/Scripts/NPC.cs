@@ -209,6 +209,9 @@ public class NPC : MonoBehaviour {
 
 	private NavMeshAgent navComponent;
 
+	public float pathingDelay = 0.1f;
+	public float pathingCooldown;
+
 	public GameObject groundReference;
 	public ZombieSpawner zombieSpawnerReference;
 
@@ -239,6 +242,8 @@ public class NPC : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		pathingCooldown = Random.Range(0.0f, 0.1f);
+
 		zombieSpawnerReference = groundReference.GetComponent<ZombieSpawner>();
 
         UpdateStats();
@@ -256,6 +261,8 @@ public class NPC : MonoBehaviour {
 
 		if (!ragdoll)
 		{
+			pathingCooldown -= Time.deltaTime;
+
 			gettingPushed -= Time.deltaTime;
 			if (gettingPushed > 0)
 			{
@@ -270,7 +277,9 @@ public class NPC : MonoBehaviour {
 			{
             	biteCooldown -= Time.deltaTime;
 
-           		FindNearestHuman();
+				if (pathingCooldown <= 0 || !target)
+           			FindNearestHuman();
+
 
 				if (target) 
 				{
@@ -283,9 +292,10 @@ public class NPC : MonoBehaviour {
 			} 
 			else 
 			{
-            	FindNearestZombie();
+				if (pathingCooldown <= 0 || !target)
+            		FindNearestZombie();
 
-            	if (target != null)
+            	if (target)
             	{
                 	if ((transform.position - target.position).magnitude < 10)
                 	{
@@ -308,10 +318,16 @@ public class NPC : MonoBehaviour {
             	}
 			}
 
-			if (isZombie)
-				navComponent.SetDestination (target.position);
-			else
-				navComponent.SetDestination (targetPosition);
+			if (pathingCooldown <= 0)
+			{
+				if (isZombie)
+					navComponent.SetDestination (target.position);
+				else
+					navComponent.SetDestination (targetPosition);
+
+
+				pathingCooldown += pathingDelay;
+			}
 
         	if (health <= 0)
         	{
