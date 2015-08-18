@@ -45,7 +45,7 @@ public class Bullet : MonoBehaviour {
 				script.health -= damage;
 				GameObject bloodSpray = (GameObject)Instantiate(blood, transform.position + transform.forward * distance, transform.rotation);
 				bloodSpray.transform.parent = collidedObject.transform;
-				script.GetPushed(transform.forward);
+				script.GetPushed(transform.forward * 0.5f);
 			}
 		}
 
