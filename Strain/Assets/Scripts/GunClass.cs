@@ -7,6 +7,8 @@ public class GunClass : MonoBehaviour {
 
 	public GameObject bullet;
 
+	public GameObject muzzleFlash;
+
 	public Camera mainCamera;
 
     //how many bullets shot at once (for shotgun)
@@ -106,6 +108,8 @@ public class GunClass : MonoBehaviour {
                 currentClipAmmo -= 1;
 
 				mainCamera.GetComponent<CameraMove>().screenShake = true;
+
+				Instantiate(muzzleFlash, transform.position + transform.forward * 0.5f, transform.rotation);
 			}
 		}
         else if (Input.GetKeyDown(KeyCode.R))

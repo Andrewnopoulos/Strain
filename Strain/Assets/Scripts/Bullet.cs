@@ -5,6 +5,8 @@ public class Bullet : MonoBehaviour {
 
     public float damage;
 
+	public GameObject blood;
+
 	private LineRenderer lineRenderer;
 
 	private Vector3 startPos;
@@ -41,6 +43,8 @@ public class Bullet : MonoBehaviour {
 			{
 				NPC script = collidedObject.GetComponent<NPC>();
 				script.health -= damage;
+				GameObject bloodSpray = (GameObject)Instantiate(blood, transform.position + transform.forward * distance, transform.rotation);
+				bloodSpray.transform.parent = collidedObject.transform;
 				script.GetPushed(transform.forward);
 			}
 		}
