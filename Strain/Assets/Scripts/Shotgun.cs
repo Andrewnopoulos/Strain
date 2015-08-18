@@ -17,7 +17,7 @@ public class Shotgun : GunClass {
         currentClipAmmo = maxClipAmmo;
         reloadTime = 3.0f;
         currentReloadTime = reloadTime;
-
+		screenShakeAmmount = 0.2f;
     }
 
 }

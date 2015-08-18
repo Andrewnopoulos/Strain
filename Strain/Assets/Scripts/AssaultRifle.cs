@@ -18,6 +18,7 @@ public class AssaultRifle : GunClass
 		currentClipAmmo = maxClipAmmo;
 		reloadTime = 3.0f;
 		currentReloadTime = reloadTime;
+		screenShakeAmmount = 0.1f;
 		
 	}
 

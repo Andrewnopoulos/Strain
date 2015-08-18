@@ -18,6 +18,7 @@ public class Pistol : GunClass
 		currentClipAmmo = maxClipAmmo;
 		reloadTime = 2.0f;
 		currentReloadTime = reloadTime;
+		screenShakeAmmount = 0.2f;
 
 	}
 	

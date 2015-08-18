@@ -20,6 +20,13 @@ public class CameraMove : MonoBehaviour {
 	
 	}
 
+	public void ShakeScreen(float x, float z)
+	{
+		screenShake = true;
+		xShake = x;
+		zShake = z;
+	}
+
 	void Update () {
 
 		if (screenShake)

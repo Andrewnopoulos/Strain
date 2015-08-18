@@ -11,6 +11,8 @@ public class GunClass : MonoBehaviour {
 
 	public Camera mainCamera;
 
+	public float screenShakeAmmount;
+
     //how many bullets shot at once (for shotgun)
     public float shotCount;
 
@@ -107,7 +109,7 @@ public class GunClass : MonoBehaviour {
 
                 currentClipAmmo -= 1;
 
-				mainCamera.GetComponent<CameraMove>().screenShake = true;
+				mainCamera.GetComponent<CameraMove>().ShakeScreen(screenShakeAmmount, screenShakeAmmount);
 
 				Instantiate(muzzleFlash, transform.position + transform.forward * 0.5f, transform.rotation);
 			}

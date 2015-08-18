@@ -63,7 +63,7 @@ public class PlayerMove : MonoBehaviour {
                         velocity = dodgeRollDir;
                         transform.GetComponentInParent<Player>().currentStamina -= dodgeRollCost;
 
-						mainCamera.GetComponent<CameraMove>().screenShake = true;
+						mainCamera.GetComponent<CameraMove>().ShakeScreen(0.1f, 0.1f);
                     }
                 }
             }
