@@ -212,6 +212,9 @@ public class NPC : MonoBehaviour {
 	public float pathingDelay = 0.1f;
 	public float pathingCooldown;
 
+	public GameObject normalZombie;
+	public GameObject hulkZombie;
+
 	public GameObject groundReference;
 	public ZombieSpawner zombieSpawnerReference;
 
@@ -449,6 +452,14 @@ public class NPC : MonoBehaviour {
 		myMat.material = red;
 
         UpdateStats();
+
+		hulkZombie.GetComponentInChildren<Renderer>().enabled = true;
+
+		normalZombie.GetComponentsInChildren<Renderer>()[0].enabled = false;
+		normalZombie.GetComponentsInChildren<Renderer>()[1].enabled = false;
+
+		gameObject.GetComponent<CapsuleCollider>().radius = 0.75f;
+		gameObject.GetComponent<CapsuleCollider>().height = 2.2f;
 
         FindNearestHuman();
 	}
