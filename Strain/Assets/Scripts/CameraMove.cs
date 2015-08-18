@@ -48,12 +48,12 @@ public class CameraMove : MonoBehaviour {
 			}
 
 			transform.position = player.transform.position + new Vector3 (0.0f + shakeOffset.x, 
-			                                                              16.0f + shakeOffset.y, 
-			                                                              -10.0f + shakeOffset.z);
+			                                                              12.0f + shakeOffset.y, 
+			                                                              -7.5f + shakeOffset.z);
 		}
 		else
 		{
-			transform.position = player.transform.position + new Vector3 (0.0f, 16.0f, -10.0f);
+			transform.position = player.transform.position + new Vector3 (0.0f, 12.0f, -7.5f);
 		}
 	}
 }
