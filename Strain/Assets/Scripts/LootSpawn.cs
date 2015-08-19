@@ -51,7 +51,7 @@ public class LootSpawn : MonoBehaviour {
     {
 
         if (currentLoot)
-            Destroy(currentLoot);
+            return;
 
         if (Random.Range(0, 100) < lootSpawnChance)
         {
