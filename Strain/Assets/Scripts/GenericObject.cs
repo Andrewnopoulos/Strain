@@ -17,21 +17,28 @@ public class GenericObject : MonoBehaviour {
         {
             if (transform.GetComponent<Renderer>().material.shader != Shader.Find("Transparent/Diffuse"))
             {
-                Renderer rend = transform.GetComponent<Renderer>();
+                for (int i = 0; i < transform.GetComponents<Renderer>().Length; ++i)
+                {
+                    Renderer rend = transform.GetComponents<Renderer>()[i];
 
-                rend.material.shader = Shader.Find("Transparent/Diffuse");
-                Color tempColor = rend.material.color;
-                tempColor.a = 0.4F;
-                rend.material.color = tempColor;
+                    rend.material.shader = Shader.Find("Transparent/Diffuse");
+                    Color tempColor = rend.material.color;
+                    tempColor.a = 0.4F;
+                    rend.material.color = tempColor;
+                }
+
             }
         }
         else
         {
             if (transform.GetComponent<Renderer>().material.shader == Shader.Find("Transparent/Diffuse"))
             {
-                Renderer rend = transform.GetComponent<Renderer>();
+                for (int i = 0; i < transform.GetComponents<Renderer>().Length; ++i)
+                {
+                    Renderer rend = transform.GetComponents<Renderer>()[i];
 
-                rend.material.shader = Shader.Find("Standard");
+                    rend.material.shader = Shader.Find("Standard");
+                }
             }
         }
 
